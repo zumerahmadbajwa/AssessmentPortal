@@ -1,0 +1,11 @@
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark">  
+  <div class="text-light text-center">
+    <% if user_signed_in? %> 
+    <div> Welcome <%= current_user.email %> </div> 
+      <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
+    <% else %>
+      <%= button_to "Sign in", new_user_session_path %> 
+    <% end %>
+    <h1>Welcome to AssessmentPortal</h1>
+  </div>
+</div>
