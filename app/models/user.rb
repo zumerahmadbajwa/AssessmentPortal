@@ -8,6 +8,8 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :username, :email, :password, presence: true, on: :create
 
+  enum role: %i[admin client]
+
   # username/email validation
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
