@@ -1,4 +1,4 @@
-<div class="container-fluid w-100 shadow mt-5 rounded border p-4 bg-dark bg-gradient" >
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark bg-gradient" >
    <h2 class= "text-light">Project's List</h2>
    <div class= "text-light"><hr></div>
    <table class="table table-sm">
@@ -6,8 +6,6 @@
        <th class="text-light">ID</th>
        <th class="text-light">Title</th>
        <th class="text-light">Description</th>
-       <th class="text-light">Sart_date</th>
-       <th class="text-light">End_Date</th>
        <th class="text-light">Status</th>
        <th class="text-light">Associated User</th>
        <th class="text-light">Action</th>
@@ -18,8 +16,6 @@
            <td><%= project.id %></td>
            <td><%= project.title %></td>
            <td><%= project.description %></td>
-           <td><%= project.start_date %></td>
-           <td><%= project.end_date %></td>
            <td><%= project.status %></td>
            <td><%= project.users.ids %></td>
            <td>

@@ -2,13 +2,15 @@
   <%= link_to "Back", admin_projects_path %>
   <div class="text-light text-center">
     <h3>Project:<%= @project.id %></h3>
-    <p> Project_Title: <%= @project.title %></p>
-    <p> Project_Description: <%= @project.description %></p>
-    <p> Project_Status: <%= @project.status %></p>
-    <p> User:
+    <p><b>Project_Title: </b><%= @project.title %></p>
+    <p><b>Project_Description: </b><%= @project.description %></p>
+    <p><b>Start_date: </b><%= @project.start_date %></p>
+    <p><b>End_date: </b><%= @project.end_date %></p>
+    <p><b>Project_Status: </b><%= @project.status %></p>
+    <p><b>Associated User: </b>
       <% @project.users.each do |user| %>
-        <%= user.id %>
-        <%= user.username %>
+        <p><b>User_ID: </b><%= user.id %>
+        <p><b>Username: </b><%= user.username %>
       <% end %>
     </p>
   </div>
