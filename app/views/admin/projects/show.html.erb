@@ -1,0 +1,15 @@
+<div class="container-fluid w-50 shadow mt-5 rounded border p-4 bg-dark">
+  <%= link_to "Back", admin_projects_path %>
+  <div class="text-light text-center">
+    <h3>Project:<%= @project.id %></h3>
+    <p> Project_Title: <%= @project.title %></p>
+    <p> Project_Description: <%= @project.description %></p>
+    <p> Project_Status: <%= @project.status %></p>
+    <p> User:
+      <% @project.users.each do |user| %>
+        <%= user.id %>
+        <%= user.username %>
+      <% end %>
+    </p>
+  </div>
+ </div>
