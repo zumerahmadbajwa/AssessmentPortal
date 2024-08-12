@@ -7,11 +7,5 @@
     <p><b>Start_date: </b><%= @project.start_date %></p>
     <p><b>End_date: </b><%= @project.end_date %></p>
     <p><b>Project_Status: </b><%= @project.status %></p>
-    <p><b>Associated User: </b>
-      <% @project.users.each do |user| %>
-        <p><b>User_ID: </b><%= user.id %>
-        <p><b>Username: </b><%= user.username %>
-      <% end %>
-    </p>
   </div>
  </div>

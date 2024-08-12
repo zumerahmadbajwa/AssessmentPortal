@@ -1,5 +1,5 @@
 <div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark bg-gradient" >
-   <h2 class= "text-light">Project's List</h2>
+   <h2 class= "text-light">Projects</h2>
    <div class= "text-light"><hr></div>
    <table class="table table-sm">
      <thead>
@@ -7,7 +7,6 @@
        <th class="text-light">Title</th>
        <th class="text-light">Description</th>
        <th class="text-light">Status</th>
-       <th class="text-light">Associated User</th>
        <th class="text-light">Action</th>
      </thead>
      <tbody class="text-light">
@@ -17,11 +16,11 @@
            <td><%= project.title %></td>
            <td><%= project.description %></td>
            <td><%= project.status %></td>
-           <td><%= project.users.ids %></td>
            <td>
-             <%= link_to "Show", admin_project_path(project) %>
-             <%= link_to "Edit", edit_admin_project_path(project) %>
-             <%= link_to 'Destroy', admin_project_path(project.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to "Assessment", admin_project_assessments_path(project) %>
+            <%= link_to "Show", admin_project_path(project) %>
+            <%= link_to "Edit", edit_admin_project_path(project) %>
+            <%= link_to 'Destroy', admin_project_path(project.id), method: :delete, data: { confirm: 'Are you sure?' } %>
            </td>
          </tr>
        <% end %>

@@ -15,10 +15,10 @@ module Admin
       @project = Project.new(project_params)
       if @project.save
       # Optionally associate additional users (e.g., from a form input)
-        if params[:project][:user_ids]
-          additional_users = User.where(id: params[:project][:user_ids])
-          @project.users << additional_users
-        end
+        # if params[:project][:user_ids]
+        #   additional_users = User.where(id: params[:project][:user_ids])
+        #   @project.users << additional_users
+        # end
 
         redirect_to admin_project_path(@project), notice: 'Project was successfully created.'
       else
