@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   attr_accessor :login
   
-  has_many :project_users
+  has_many :project_users, dependent: :destroy
   has_many :projects, through: :project_users
   has_many :user_assessments
   has_many :assesments, through: :user_assessments
@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :username, :email, :password, presence: true, on: :create
 
-  enum role: %i[admin client]
+  enum role: %i[admin candidate]
 
   # username/email validation
   def self.find_for_database_authentication(warden_conditions)

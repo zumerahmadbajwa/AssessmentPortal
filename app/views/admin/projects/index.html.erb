@@ -7,6 +7,7 @@
        <th class="text-light">Title</th>
        <th class="text-light">Description</th>
        <th class="text-light">Status</th>
+       <th class="text-light">Associated User</th>
        <th class="text-light">Action</th>
      </thead>
      <tbody class="text-light">
@@ -16,6 +17,7 @@
            <td><%= project.title %></td>
            <td><%= project.description %></td>
            <td><%= project.status %></td>
+           <td><%= project.users.ids %></td>
            <td>
             <%= link_to "Assessment", admin_project_assessments_path(project) %>
             <%= link_to "Show", admin_project_path(project) %>

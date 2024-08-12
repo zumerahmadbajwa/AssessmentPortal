@@ -1,0 +1,39 @@
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark bg-gradient" >
+  <div class= "text-light">
+    <h1>Users for Project: <%= @project.title %></h1>
+
+    <h3>Users Associated with Project</h3>
+    <table class="table table-sm">
+      <thead class="text-light">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody class="text-light">
+        <% @project_users.each do |user| %>
+          <tr>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td>
+              <%= link_to 'Remove', admin_project_project_user_path(@project, user), method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <h2>Add User to Project</h2>
+    <%= form_with url: admin_project_project_users_path(@project), local: true do |form| %>
+      <div class="field">
+        <%= form.label :user_id, 'Select User' %>
+        <%= form.collection_select :user_id, @users, :id, :username %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit 'Add User' %>
+      </div>
+    <% end %>
+  </div>
+</div>

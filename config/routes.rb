@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   
   namespace :admin do
     resources :projects do
+      resources :project_users, only: [:index, :create, :destroy]
       resources :assessments
     end
   end

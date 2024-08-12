@@ -1,5 +1,5 @@
 module Admin
-  # User Controller
+  # Project Controller
   class ProjectsController < ApplicationController
     before_action :find_project, only: %i[show edit update destroy]
 
