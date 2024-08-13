@@ -1,0 +1,14 @@
+<div class="container-fluid w-50 shadow mt-5 rounded border p-4 bg-dark">
+  <%= link_to "Back", admin_project_assessments_path %>
+  <div class="text-light text-center">
+    <h3>Assessmt:<%= @assessment.id %></h3>
+    <p><b>Assessment_Title: </b><%= @assessment.title %></p>
+    <p><b>Assessment_Description: </b><%= @assessment.description %></p>
+    <p><b>Associated User: </b>
+      <% @assessment.users.each do |user| %>
+        <p><b>User_ID: </b><%= user.id %>
+        <p><b>Username: </b><%= user.username %>
+      <% end %>
+    </p>
+  </div>
+ </div>

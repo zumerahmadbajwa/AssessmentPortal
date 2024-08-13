@@ -1,0 +1,16 @@
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark bg-gradient" >
+  <h1 class= "text-light">Assessments for <%= @project.title %></h1>
+
+  <%= link_to 'New Assessment', new_admin_project_assessment_path(@project) %>
+
+  <ul>
+    <% @project.assessments.each do |assessment| %>
+      <li>
+        <%= link_to assessment.title, admin_project_assessment_path(@project, assessment) %>
+        <%= link_to "Show", admin_project_assessment_path(@project, assessment) %>
+        <%= link_to 'Edit', edit_admin_project_assessment_path(@project, assessment) %>
+        <%= link_to 'Delete', admin_project_assessment_path(@project, assessment), method: :delete, data: { confirm: 'Are you sure?' } %>
+      </li>
+    <% end %>
+  </ul>
+</div>
