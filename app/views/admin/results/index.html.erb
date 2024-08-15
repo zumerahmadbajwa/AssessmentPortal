@@ -1,0 +1,23 @@
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark">
+  <h1 class= "text-light">Results for Assessment: <%= @assessment.title %></h1>
+
+  <table class="table table-sm">
+    <thead class= "text-light">
+      <tr>
+        <th>User</th>
+        <th>Score</th>
+        <th>Answers</th>
+      </tr>
+    </thead>
+    <tbody class= "text-light">
+      <% @results.each do |result| %>
+        <tr>
+          <td><%= result.user.username %></td>
+          <td><%= result.score %></td>
+          <td><%= result.answers %></td>
+          <td><%= link_to 'View', admin_project_assessment_result_path(@assessment.project, @assessment, result) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,5 @@
+<div class="container-fluid w-50 shadow mt-5 rounded border p-4 bg-dark text-light">
+  <h1>Result for <%= @result.user.username %></h1>
+  <p>Score: <%= @result.score %></p>
+  <%= link_to 'Back', admin_project_assessment_results_path(@assessment.project, @assessment) %>
+</div>

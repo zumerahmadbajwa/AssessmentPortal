@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :projects do
       resources :project_users, only: [:index, :create, :destroy]
-      resources :assessments
+      resources :assessments do 
+        resources :results, only: [:index, :show]
+      end
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
