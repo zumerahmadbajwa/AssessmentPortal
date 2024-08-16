@@ -1,32 +1,41 @@
 <div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark bg-gradient" >
    <h2 class= "text-light">Projects</h2>
-   <div class= "text-light"><hr></div>
-   <table class="table table-sm">
-     <thead>
-       <th class="text-light">ID</th>
-       <th class="text-light">Title</th>
-       <th class="text-light">Description</th>
-       <th class="text-light">Status</th>
-       <th class="text-light">Action</th>
-     </thead>
-     <tbody class="text-light">
-       <% @projects.each do |project| %>
-         <tr>
-           <td><%= project.id %></td>
-           <td><%= project.title %></td>
-           <td><%= project.description %></td>
-           <td><%= project.status %></td>
-           <td>
-            <%= link_to "Assessment", admin_project_assessments_path(project) %>
-            <%= link_to "Show", admin_project_path(project) %>
-            <%= link_to "Edit", edit_admin_project_path(project) %>
-            <%= link_to 'Destroy', admin_project_path(project.id), method: :delete, data: { confirm: 'Are you sure?' } %>
-           </td>
-         </tr>
-       <% end %>
-     </tbody>
-   </table>
-   <%= link_to "Back", root_path  %>
-   <%= link_to "New", new_admin_project_path  %>
+   <div class= "text-light">
+    <div class="table-responsive">
+      <%= search_form_for @q, url: admin_projects_path, method: :get do |f| %>
+        <div class="float-end input-group w-50 input-group-sm mb-4" >
+          <%= f.search_field :title_cont, placeholder: "Search Here ", class:"form-control"%>
+          <%= f.submit 'Search', class: "btn btn-warning" %>
+        </div>
+      <% end %>
+      <table class="table table-sm">
+        <thead class="text-light">
+          <th>ID</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Action</th>
+        </thead>
+        <tbody class="text-light">
+          <% @projects.each do |project| %>
+            <tr>
+              <td><%= project.id %></td>
+              <td><%= project.title %></td>
+              <td><%= project.description %></td>
+              <td><%= project.status %></td>
+              <td>
+                <%= link_to "Assessment", admin_project_assessments_path(project) %>
+                <%= link_to "Show", admin_project_path(project) %>
+                <%= link_to "Edit", edit_admin_project_path(project) %>
+                <%= link_to 'Destroy', admin_project_path(project.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= link_to "Back", root_path  %>
+      <%= link_to "New", new_admin_project_path  %>
+    </div>
+  </div>
  </div>
  

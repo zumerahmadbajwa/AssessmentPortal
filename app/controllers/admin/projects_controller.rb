@@ -4,7 +4,8 @@ module Admin
     before_action :find_project, only: %i[show edit update destroy]
 
     def index
-      @projects = Project.all
+      @q = Project.ransack(params[:q])
+      @projects = @q.result
     end
 
     def new
