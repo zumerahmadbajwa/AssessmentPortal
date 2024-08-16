@@ -65,4 +65,5 @@ gem 'devise'
 gem 'bootstrap', '~> 5.2.1'
 gem 'jquery-rails'
 
-gem "pundit", "~> 2.2"
+gem 'pundit', '~> 2.2'
+gem 'ransack'
