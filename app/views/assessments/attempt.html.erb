@@ -1,0 +1,21 @@
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark bg-gradient" >
+  <div class="text-light">
+    <h1>Attempt Assessment: <%= @assessment.title %></h1>
+
+    <%= form_with url: submit_assessment_path(@assessment), method: :post, local: true do |form| %>
+      <% @questions.each do |question| %>
+        <fieldset>
+          <legend><%= question.content %></legend>
+          <% question.options.each do |option| %>
+            <div>
+              <%= form.radio_button "answers[#{question.id}]", option.id %>
+              <%= form.label "answers_#{question.id}_#{option.id}", option.content %>
+            </div>
+          <% end %>
+        </fieldset>
+      <% end %>
+
+      <%= form.submit 'Submit' %>
+    <% end %>
+  </div>
+</div>
