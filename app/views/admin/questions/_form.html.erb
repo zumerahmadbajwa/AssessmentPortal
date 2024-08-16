@@ -1,0 +1,29 @@
+<div class="container-fluid w-50 shadow mt-5 rounded border p-4 bg-dark" >
+  <div class="text-light">
+    <h1>Add New Question</h1>
+
+    <%= form_for([@project, @assessment, @question], url: admin_project_assessment_questions_path(@assessment), html: { local: true }) do |form| %>
+      <div class="field">
+        <%= form.label :content, "Question Content" %>
+        <%= form.text_area :content %>
+      </div>
+
+      <h3>Options</h3>
+      <div id="options">
+        <%= form.fields_for :options do |option_form| %>
+          <div class="field">
+            <%= option_form.label :content, "Option Content" %>
+            <%= option_form.text_field :content %>
+            <%= option_form.check_box :correct %>
+            <%= option_form.label :correct, "Correct?" %>
+            <%= option_form.hidden_field :_destroy %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+    <% end %>
+  </div>
+</div>

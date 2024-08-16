@@ -1,0 +1,24 @@
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark bg-gradient" >
+<h1>Questions for Assessment</h1>
+
+<%= link_to 'New Question', new_admin_project_assessment_question_path(@assessment) %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.content %></td>
+        <td>
+          <%= link_to 'Edit', edit_admin_project_assessment_question_path(@project, @assessment, question) %> |
+          <%= link_to 'Delete', admin_project_assessment_question_path(@project, @assessment, question), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

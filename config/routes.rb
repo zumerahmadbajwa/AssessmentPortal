@@ -6,8 +6,19 @@ Rails.application.routes.draw do
     resources :projects do
       resources :project_users, only: [:index, :create, :destroy]
       resources :assessments do 
+        resources :questions do
+          resources :options, only: [:create, :update, :destroy]
+        end
         resources :results, only: [:index, :show]
       end
+    end
+  end
+
+  resources :assessments, only: [:show] do
+    member do
+      get :attempt
+      post :submit
+      get :results
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

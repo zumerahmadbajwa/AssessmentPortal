@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_08_15_054639) do
+ActiveRecord::Schema.define(version: 2024_08_15_083601) do
 
   create_table "assessments", force: :cascade do |t|
     t.string "title"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 2024_08_15_054639) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_assessments_on_project_id"
+  end
+
+  create_table "options", force: :cascade do |t|
+    t.integer "question_id"
+    t.string "content"
+    t.boolean "correct", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_options_on_question_id"
   end
 
   create_table "project_users", force: :cascade do |t|
@@ -39,6 +48,14 @@ ActiveRecord::Schema.define(version: 2024_08_15_054639) do
     t.string "status", default: "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.integer "assessment_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assessment_id"], name: "index_questions_on_assessment_id"
   end
 
   create_table "results", force: :cascade do |t|
