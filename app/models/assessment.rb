@@ -3,4 +3,5 @@ class Assessment < ApplicationRecord
   has_many :user_assessments
   has_many :users, through: :user_assessments
   has_many :results
+  has_many :questions, dependent: :destroy
 end

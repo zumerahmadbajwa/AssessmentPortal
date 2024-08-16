@@ -1,0 +1,15 @@
+<div class="container-fluid w-50 shadow mt-5 rounded border p-4 bg-dark" >
+  <div class="text-light">
+    <p>
+      <strong>Content:</strong>
+      <%= @question.content %>
+    </p>
+
+    <h3>Options</h3>
+    <% @question.options.each do |option| %>
+      <p>
+        <strong><%= option.content %></strong> <%= option.is_correct ? "(Correct)" : "" %>
+      </p>
+    <% end %>
+  </div>
+</div>

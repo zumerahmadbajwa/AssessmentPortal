@@ -1,15 +1,14 @@
 module Admin
   # Assessment Controller
   class AssessmentsController < ApplicationController
-    before_action :set_project
+    before_action :find_project
     before_action :find_assessment, only: [:show, :edit, :update, :destroy]
 
     def index
       @assessments = @project.assessments
     end
 
-    def show
-    end
+    def show; end
 
     def new
       @assessment = @project.assessments.new
@@ -28,8 +27,7 @@ module Admin
       end
     end
 
-    def edit
-    end
+    def edit; end
 
     def update
       if @assessment.update(assessment_params)
@@ -46,12 +44,14 @@ module Admin
 
     private
 
-    def set_project
+    def find_project
       @project = Project.find(params[:project_id])
     end
 
     def find_assessment
       @assessment = @project.assessments.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        redirect_to admin_project_path(@project), alert: 'Assessment not found.'
     end
 
     def assessment_params
