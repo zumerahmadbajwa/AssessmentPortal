@@ -30,7 +30,7 @@ module Admin
     end
   
     def show; end
-    
+
     def update
       if @question.update(question_params)
         redirect_to admin_project_assessment_path(@assessment), notice: 'Question was successfully updated.'
