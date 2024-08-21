@@ -1,6 +1,6 @@
-<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark bg-gradient" >
-   <h2 class= "text-light">Projects</h2>
-   <div class= "text-light">
+<div class="w-75 shadow mt-5 rounded border p-4 bg-dark bg-gradient">
+  <h2 class= "text-light">Projects</h2>
+  <div class= "text-light">
     <div class="table-responsive">
       <%= search_form_for @q, url: admin_projects_path, method: :get do |f| %>
         <div class="float-end input-group w-50 input-group-sm mb-4" >
@@ -37,5 +37,4 @@
       <%= link_to "New", new_admin_project_path  %>
     </div>
   </div>
- </div>
- 
+</div>

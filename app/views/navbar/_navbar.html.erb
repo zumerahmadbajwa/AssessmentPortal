@@ -1,38 +1,63 @@
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<div class="container-fluid">
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<%= link_to "AssessmentPortal", root_path, class: "nav-link text-light fontstyle" %>
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<% if user_signed_in? %>
-					<% if current_user.admin? %>
-						<div class="d-flex align-items-end mx-4">
-							<li class="nav-item">
-								<%= link_to "Projects", admin_projects_path, class: "nav-link adminprojectpath" %>
-							</li>
-						</div>
-					<% end %>
-				<% end %>
-				<% if user_signed_in? %>
-					<div class="d-flex align-items-end">
-      			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-							<li class="mx-4 nav-item"><%= link_to "Logout", destroy_user_session_path, method: 'delete', class: "btn btn-warning" %></li>
-						</ul>
+<div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+	<div class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+		<span class="fs-5 d-none d-sm-inline"><%= link_to "AssessmentPortal", root_path, class: "nav-link text-light fontstyle" %></span>
+	</div>
+	<% if user_signed_in? %>
+		<% if current_user.admin? %>
+			<ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+				<li class="nav-item">
+					<div href="#" class="nav-link align-middle px-0">
+						<i class="fs-4 bi-house"></i> 
+						<span class="ms-1 d-none d-sm-inline">
+							<%= link_to "Projects", admin_projects_path, class: "nav-link adminprojectpath" %>
+						</span>
 					</div>
-				<% end %>
-				<% if !user_signed_in? %>
-					<div class="d-flex align-items-end mx-4">
-      			<div class="navbar-nav ms-auto">
-							<li class="nav-item">
-								<%= link_to "New to Portal", new_user_registration_path, class: "btn btn-warning" %>
-							</li>
-							<li class="nav-item">
-								<%= link_to "Log In", new_user_session_path, class: "mx-2 btn btn-warning ml-3" %>
-							</li>
-						</div>
+				</li>
+			</ul>
+		<% else %>
+			<ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+				<li class="nav-item">
+					<div href="#" class="nav-link align-middle px-0">
+						<i class="fs-4 bi-house"></i> 
+						<span class="ms-1 d-none d-sm-inline">
+						</span>
 					</div>
-				<% end %>
+				</li>
+			</ul>
+		<% end %>	
+	<% end %>
+	<hr>
+	<% if user_signed_in? %>
+		<div class="dropdown pb-4">
+			<a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+				<span class="d-none d-sm-inline mx-1">Logout</span>
+			</a>
+			<ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+				<li><div class="dropdown-item" href="#"><%= link_to "New", new_admin_project_path  %></div></li>
+				<li><hr class="dropdown-divider"></li>
+				<li>
+					<div class="dropdown-item">
+						<%= link_to "Signout", destroy_user_session_path, method: 'delete'%>
+					</div>
+				</li>
 			</ul>
 		</div>
-	</div>
-</nav>
+	<% end %>
+	<% if !user_signed_in? %>
+		<div class="dropdown pb-4">
+			<a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+				<span class="d-none d-sm-inline mx-1">SignIn</span>
+			</a>
+			<ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+				<li><div class="dropdown-item" href="#"><%= link_to "New to Portal", new_user_registration_path %></div></li>
+				<li><hr class="dropdown-divider"></li>
+				<li>
+					<div class="dropdown-item">
+						<%= link_to "Log In", new_user_session_path, class: "mx-2 ml-3" %>
+					</div>
+				</li>
+			</ul>
+		</div>
+	<% end %>
+</div>
+
