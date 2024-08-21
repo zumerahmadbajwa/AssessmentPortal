@@ -1,9 +1,11 @@
 class Question < ApplicationRecord
   belongs_to :assessment
   has_many :options, dependent: :destroy
+  accepts_nested_attributes_for :options, allow_destroy: true
+  
+  
   validates :content, presence: true
   validate :validate_option_count
-  accepts_nested_attributes_for :options, allow_destroy: true
 
   private
 

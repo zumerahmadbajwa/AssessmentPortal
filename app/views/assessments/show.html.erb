@@ -1,5 +1,6 @@
 <div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark bg-gradient" >
   <div class="text-light">
+  <%= link_to "Back", root_path %>
     <%= form_for @assessment, url: attempt_assessment_path(@assessment), method: :post do |form| %>
   <% @assessment.questions.each do |question| %>
     <div class="question">

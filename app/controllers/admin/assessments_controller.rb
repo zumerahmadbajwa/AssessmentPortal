@@ -1,6 +1,7 @@
 module Admin
   # Assessment Controller
   class AssessmentsController < ApplicationController
+    before_action :authorize_admin
     before_action :find_project
     before_action :find_assessment, only: [:show, :edit, :update, :destroy]
 
@@ -12,6 +13,7 @@ module Admin
 
     def new
       @assessment = @project.assessments.new
+      @assessment.questions.build
     end
 
     def create
@@ -55,7 +57,11 @@ module Admin
     end
 
     def assessment_params
-      params.require(:assessment).permit(:title, :description, user_ids: [])
+      params.require(:assessment).permit(:title, :description, user_ids: [], questions_attributes: [:id, :content, :_destroy])
+    end
+
+    def authorize_admin
+      redirect_to root_path, alert: 'You are not authorized to perform this action.' unless current_user.admin?
     end
   end
 end

@@ -2,7 +2,7 @@
   <div class="text-light">
     <h1>Add New Question</h1>
 
-    <%= form_for([@project, @assessment, @question], url: admin_project_assessment_questions_path(@assessment), html: { local: true }) do |form| %>
+    <%= form_for([@project, @assessment, @question], url: admin_project_assessment_questions_path(@project, @assessment), html: { local: true }) do |form| %>
       <div class="field">
         <%= form.label :content, "Question Content" %>
         <%= form.text_area :content %>

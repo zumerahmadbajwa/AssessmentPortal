@@ -15,6 +15,7 @@ module Admin
     end
 
     def create
+      @assessment = @project.assessments.find(params[:assessment_id])
       @question = @assessment.questions.build(question_params)
       if @question.save
         redirect_to admin_project_assessment_path(@project, @assessment), notice: 'Question was successfully created.'
@@ -63,7 +64,7 @@ module Admin
     end
 
     def question_params
-      params.require(:question).permit(:content, options_attributes: [:id, :content, :correct, :_destroy])
+      params.require(:question).permit(:content, :assessment_id, options_attributes: [:id, :content, :correct, :_destroy])
     end
   end
 end
