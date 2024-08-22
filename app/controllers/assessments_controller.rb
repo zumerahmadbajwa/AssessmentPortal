@@ -20,7 +20,17 @@ class AssessmentsController < ApplicationController
 
     @score = calculate_score(user_answers)
 
-    redirect_to results_assessment_path(@assessment, score: @score, answers: serialized_answers)
+    @result = @assessment.results.create(
+      user: current_user,
+      score: @score,
+      answers: serialized_answers
+    )
+    if @result.save
+      redirect_to results_assessment_path(@assessment, score: @score, answers: serialized_answers)
+    else
+      flash[:alert] = 'Error saving result. Please try again.'
+      render :attempt
+    end
   end
 
   def results

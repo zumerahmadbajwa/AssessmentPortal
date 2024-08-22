@@ -1,5 +1,25 @@
 <div class="container-fluid w-50 shadow mt-5 rounded border p-4 bg-dark text-light">
-  <h1>Result for <%= @result.user.username %></h1>
-  <p>Score: <%= @result.score %></p>
-  <%= link_to 'Back', admin_project_assessment_results_path(@assessment.project, @assessment) %>
+  <h1>Result Details</h1>
+
+  <p>
+    <strong>User:</strong>
+    <%= @result.user.username %>
+  </p>
+
+  <p>
+    <strong>Score:</strong>
+    <%= @result.score %>
+  </p>
+
+  <p>
+    <strong>Assessment:</strong>
+    <%= @assessment.title %>
+  </p>
+
+  <p>
+    <strong>Project:</strong>
+    <%= @project.title %>
+  </p>
+
+  <%= link_to 'Back to Results', admin_project_assessment_results_path(@project, @assessment), class: 'btn btn-secondary' %>
 </div>
