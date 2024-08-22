@@ -1,4 +1,4 @@
-<div class="container-fluid w-50 shadow mt-5 rounded border p-4 bg-dark">
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark">
   <%= link_to "Back", admin_project_assessments_path %>
   <div class="text-light">
     <h3>Assessmt:<%= @assessment.id %></h3>
@@ -14,8 +14,8 @@
     <% @assessment.questions.each do |question| %>
       <div class="question">
         <h3><%= question.content %></h3>
-        <%= link_to 'Edit', edit_admin_project_assessment_question_path(@assessment, question) %>
-        <%= link_to 'Delete', admin_project_assessment_question_path(@assessment, question), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Edit', edit_admin_project_assessment_question_path(@project, @assessment, question) %>
+        <%= link_to 'Delete', admin_project_assessment_question_path(@project, @assessment, question), method: :delete, data: { confirm: 'Are you sure?' } %>
       </div>
     <% end %>
   </div>

@@ -1,8 +1,23 @@
 <div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark bg-gradient" >
   <div class="text-light">
-    <h1>Results for Assessment: <%= @result.assessment.title %></h1>
+    <%= link_to "Back", assessment_path %>
+    <h1>Results for <%= @assessment.title %></h1>
+    <p>Score: <%= @score %></p>
 
-    <p>Score: <%= @result.score %></p>
-    <p>Answers: <%= @result.answers %></p>
+    <h2>Answers:</h2>
+    <% if @answers.present? %>
+      <ul>
+        <% @answers.each do |question_id, selected_option_id| %>
+          <% question = Question.find(question_id) %>
+          <% option = Option.find(selected_option_id) %>
+          <li>
+            Question: <%= question.content %><br>
+            Selected Option: <%= option.content %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No answers provided.</p>
+    <% end %>
   </div>
 </div>

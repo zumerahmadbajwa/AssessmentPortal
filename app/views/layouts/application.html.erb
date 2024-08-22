@@ -12,7 +12,15 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= render 'navbar/navbar' %>
-    <%= yield %>
+    <div class="container-fluid">
+      <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark rounded border bg-gradient">
+          <%= render 'navbar/navbar', project: @project, assessment: @assessment, result: @result %>
+        </div>
+        <main class="col px-4">
+          <%= yield %>
+        </main>
+      </div>
+    </div>
   </body>
 </html>

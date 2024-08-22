@@ -15,7 +15,8 @@
           <td><%= result.user.username %></td>
           <td><%= result.score %></td>
           <td><%= result.answers %></td>
-          <td><%= link_to 'View', admin_project_assessment_result_path(@assessment.project, @assessment, result) %></td>
+          <td><%= link_to 'Destroy', admin_project_assessment_result_path(@project, @assessment, result), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'View', admin_project_assessment_result_path(@project, @assessment, result) %></td>
         </tr>
       <% end %>
     </tbody>

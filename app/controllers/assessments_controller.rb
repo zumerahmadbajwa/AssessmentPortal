@@ -2,24 +2,40 @@
 class AssessmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_assessment, only: [:show, :attempt, :submit, :results]
-
+  
   def show
     @questions = @assessment.questions.includes(:options)
   end
 
   def attempt
+    authorize @assessment
     @questions = @assessment.questions.includes(:options)
+    @assessments = current_user.assessments.find(params[:id])
   end
 
   def submit
-    answers = params[:answers]  # Hash with question_id as key and selected option_id as value
-    score = calculate_score(answers)
-    Result.create!(user: current_user, assessment: @assessment, score: score, answers: answers.to_json)
-    redirect_to results_assessment_path(@assessment), notice: 'Assessment submitted successfully.'
+    user_answers = permitted_params[:answers] || {}
+
+    serialized_answers = user_answers.to_json # Serialize answers to JSON
+
+    @score = calculate_score(user_answers)
+
+    @result = @assessment.results.create(
+      user: current_user,
+      score: @score,
+      answers: serialized_answers
+    )
+    if @result.save
+      redirect_to results_assessment_path(@assessment, score: @score, answers: serialized_answers)
+    else
+      flash[:alert] = 'Error saving result. Please try again.'
+      render :attempt
+    end
   end
 
   def results
-    @result = Result.find_by(user: current_user, assessment: @assessment)
+    @score = params[:score].to_i
+    @answers = JSON.parse(params[:answers] || '{}') 
   end
 
   private
@@ -29,6 +45,10 @@ class AssessmentsController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     flash[:alert] = 'Assessment not found.'
     redirect_to assessments_path
+  end
+
+  def permitted_params
+    params.permit(:id, answers: {})
   end
 
   def calculate_score(answers)
@@ -43,7 +63,6 @@ class AssessmentsController < ApplicationController
       end
     end
 
-    # Assuming each question scored 10 points
     correct_answers * 10
   end
 end

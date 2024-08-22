@@ -6,10 +6,10 @@ Rails.application.routes.draw do
     resources :projects do
       resources :project_users, only: [:index, :create, :destroy]
       resources :assessments do 
+        resources :results, only: [:index, :show, :destroy]
         resources :questions do
           resources :options, only: [:create, :update, :destroy]
-        end
-        resources :results, only: [:index, :show]
+        end    
       end
     end
   end

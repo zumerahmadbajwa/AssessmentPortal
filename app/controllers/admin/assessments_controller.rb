@@ -12,6 +12,7 @@ module Admin
 
     def new
       @assessment = @project.assessments.new
+      @assessment.questions.build
     end
 
     def create
@@ -55,7 +56,7 @@ module Admin
     end
 
     def assessment_params
-      params.require(:assessment).permit(:title, :description, user_ids: [])
+      params.require(:assessment).permit(:title, :description, user_ids: [], questions_attributes: [:id, :content, :_destroy])
     end
   end
 end

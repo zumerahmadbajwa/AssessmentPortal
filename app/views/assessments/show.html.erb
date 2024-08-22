@@ -1,14 +1,15 @@
 <div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark bg-gradient" >
   <div class="text-light">
+  <%= link_to "Back", root_path %>
     <%= form_for @assessment, url: attempt_assessment_path(@assessment), method: :post do |form| %>
   <% @assessment.questions.each do |question| %>
     <div class="question">
       <p><%= question.content %></p>
       <% question.options.each do |option| %>
         <div class="option">
-          <%= form.check_box :answers, { multiple: true }, option.id, nil %>
-          <%= form.label :answers, option.content, value: option.id %>
-          <% if option.is_correct %>
+          <%= form.check_box :results, { multiple: true }, option.id, nil %>
+          <%= form.label :results, option.content, value: option.id %>
+          <% if option.correct %>
             <em>(Correct Answer)</em>
           <% end %>
         </div>

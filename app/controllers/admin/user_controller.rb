@@ -2,7 +2,6 @@ module Admin
   # User Controller
   class UsersController < ApplicationController
     before_action :find_user, only: %i[show edit update destroy]
-    before_action :current_cart
 
     def index
       @users = User.all
