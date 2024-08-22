@@ -32,18 +32,10 @@
 	<hr>
 	<% if user_signed_in? %>
 		<div class="dropdown pb-4">
-			<a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-				<span class="d-none d-sm-inline mx-1">Logout</span>
-			</a>
-			<ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-				<li><div class="dropdown-item" href="#"><%= link_to "New", new_admin_project_path  %></div></li>
-				<li><hr class="dropdown-divider"></li>
-				<li>
-					<div class="dropdown-item">
-						<%= link_to "Signout", destroy_user_session_path, method: 'delete'%>
-					</div>
-				</li>
-			</ul>
+			<span class="d-none d-sm-inline mx-1">
+				<%= link_to "Back", root_path, class: 'btn btn-secondary'%>
+				<%= link_to "Signout", destroy_user_session_path, method: 'delete', class: 'btn btn-secondary'%>
+			</span>
 		</div>
 	<% end %>
 	<% if !user_signed_in? %>

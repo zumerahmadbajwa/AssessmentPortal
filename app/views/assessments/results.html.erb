@@ -1,6 +1,6 @@
 <div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark bg-gradient" >
   <div class="text-light">
-    <%= link_to "Back", assessment_path %>
+    <%= link_to "Back", root_path %>
     <h1>Results for <%= @assessment.title %></h1>
     <p>Score: <%= @score %></p>
 
@@ -19,5 +19,6 @@
     <% else %>
       <p>No answers provided.</p>
     <% end %>
+    <%= link_to "Show Correct Answers", assessment_path %>
   </div>
 </div>

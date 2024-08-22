@@ -20,6 +20,10 @@
     <strong>Project:</strong>
     <%= @project.title %>
   </p>
-
+  
+  <p>
+    <strong>Want to Delete?</strong>
+    <%= link_to 'Destroy', admin_project_assessment_result_path(@project, @assessment, @result), method: :delete, data: { confirm: 'Are you sure?' } %>        
+  </p>
   <%= link_to 'Back to Results', admin_project_assessment_results_path(@project, @assessment), class: 'btn btn-secondary' %>
 </div>

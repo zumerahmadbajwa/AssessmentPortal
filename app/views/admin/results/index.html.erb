@@ -1,5 +1,6 @@
 <div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark">
-  <h1 class= "text-light">Results for Assessment: <%= @assessment.title %></h1>
+  <%= link_to "Back", admin_project_assessment_path(@project, @assessment) %>
+  <h3 class= "text-light">Results for <%= @assessment.title %></h3>
 
   <table class="table table-sm">
     <thead class= "text-light">
@@ -7,6 +8,7 @@
         <th>User</th>
         <th>Score</th>
         <th>Answers</th>
+        <th>Details</th>
       </tr>
     </thead>
     <tbody class= "text-light">
@@ -15,7 +17,6 @@
           <td><%= result.user.username %></td>
           <td><%= result.score %></td>
           <td><%= result.answers %></td>
-          <td><%= link_to 'Destroy', admin_project_assessment_result_path(@project, @assessment, result), method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <td><%= link_to 'View', admin_project_assessment_result_path(@project, @assessment, result) %></td>
         </tr>
       <% end %>

@@ -1,16 +1,23 @@
 <div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark bg-gradient" >
   <h1 class= "text-light">Assessments for <%= @project.title %></h1>
-
-  <%= link_to 'New Assessment', new_admin_project_assessment_path(@project) %>
-
-  <ul>
-    <% @project.assessments.each do |assessment| %>
-      <li>
-        <%= link_to assessment.title, admin_project_assessment_path(@project, assessment) %>
-        <%= link_to "Show", admin_project_assessment_path(@project, assessment) %>
-        <%= link_to 'Edit', edit_admin_project_assessment_path(@project, assessment) %>
-        <%= link_to 'Delete', admin_project_assessment_path(@project, assessment), method: :delete, data: { confirm: 'Are you sure?' } %>
-      </li>
-    <% end %>
-  </ul>
+  <table class="table table-sm">
+    <thead class="text-light">
+      <th>ID</th>
+      <th>Title</th>
+      <th>Action</th>
+    </thead>
+    <tbody class="text-light">
+      <% @project.assessments.each do |assessment| %>
+        <td><%= assessment.id %></td>
+        <td><%= assessment.title %></td>
+        <td>
+          <%= link_to "Show", admin_project_assessment_path(@project, assessment) %>
+          <%= link_to 'Edit', edit_admin_project_assessment_path(@project, assessment) %>
+          <%= link_to 'Delete', admin_project_assessment_path(@project, assessment), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to "Back", admin_projects_path, class: 'btn btn-secondary' %>
+  <%= link_to 'New Assessment', new_admin_project_assessment_path(@project, @assessment), class: 'btn btn-secondary' %>
 </div>
