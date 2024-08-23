@@ -20,10 +20,24 @@
     <strong>Project:</strong>
     <%= @project.title %>
   </p>
-  
+
+  <h3>Questions</h3>
+    <ol>
+      <% @result.user_answers.includes(:question, :selected_option).each do |user_answer| %>
+        <% question = user_answer.question %>
+        <% selected_option = user_answer.selected_option %>
+        <% correct_option = question.options.find_by(correct: true) %>
+        <li>
+          <strong>Question:</strong> <%= question.content %><br>
+          <strong>Selected Answer:</strong> <%= selected_option ? selected_option.content : 'No answer selected' %><br>
+          <strong>Correct Answer:</strong> <%= correct_option ? correct_option.content : 'No correct option' %>
+        </li>
+      <% end %>
+    </ol>
+
   <p>
     <strong>Want to Delete?</strong>
-    <%= link_to 'Destroy', admin_project_assessment_result_path(@project, @assessment, @result), method: :delete, data: { confirm: 'Are you sure?' } %>        
+    <%= link_to 'Delete', admin_project_assessment_result_path(@project, @assessment, @result), method: :delete, data: { confirm: 'Are you sure?' } %>        
   </p>
   <%= link_to 'Back to Results', admin_project_assessment_results_path(@project, @assessment), class: 'btn btn-secondary' %>
 </div>

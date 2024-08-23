@@ -3,20 +3,15 @@
     <%= link_to "Back", root_path %>
     <h1>Attempt Assessment: <%= @assessment.title %></h1>
 
-    <%= form_with url: submit_assessment_path(@assessment), method: :post, local: true do |form| %>
+    <%= form_for @assessment, url: submit_assessment_path(@assessment), method: :post do |f| %>
       <% @questions.each do |question| %>
-        <fieldset>
-          <legend><%= question.content %></legend>
-          <% question.options.each do |option| %>
-            <div>
-              <%= form.radio_button "answers[#{question.id}]", option.id %>
-              <%= form.label "answers_#{question.id}_#{option.id}", option.content %>
-            </div>
-          <% end %>
-        </fieldset>
+        <p><%= question.content %></p>
+        <% question.options.each do |option| %>
+          <%= radio_button_tag "answers[#{question.id}]", option.id %>
+          <%= label_tag "answers[#{question.id}]", option.content %><br>
+        <% end %>
       <% end %>
-
-      <%= form.submit 'Submit' %>
+      <%= f.submit 'Submit' %>
     <% end %>
   </div>
 </div>

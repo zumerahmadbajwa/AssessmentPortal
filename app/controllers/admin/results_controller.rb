@@ -6,7 +6,8 @@ module Admin
     before_action :set_project_and_assessment
     
     def index
-      @results = @assessment.results
+      @assessment = Assessment.find(params[:assessment_id])
+      @results = @assessment.results.includes(:user_answers)
     end
 
     def show
