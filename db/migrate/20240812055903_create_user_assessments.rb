@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Create UserAssessments
 class CreateUserAssessments < ActiveRecord::Migration[5.2]
   def change
     create_table :user_assessments do |t|

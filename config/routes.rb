@@ -1,19 +1,19 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users
-  root to: "home#index"
-  
+  root to: 'home#index'
   namespace :admin do
     resources :projects do
-      resources :project_users, only: [:index, :create, :destroy]
-      resources :assessments do 
-        resources :results, only: [:index, :show, :destroy]
+      resources :project_users, only: %i[index create destroy]
+      resources :assessments do
+        resources :results, only: %i[index show destroy]
         resources :questions do
-          resources :options, only: [:create, :update, :destroy]
-        end    
+          resources :options, only: %i[create update destroy]
+        end
       end
     end
   end
-
   resources :assessments, only: [:show] do
     member do
       get :attempt

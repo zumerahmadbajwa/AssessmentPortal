@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Admin
   # Questions Controller
   class QuestionsController < ApplicationController
@@ -24,22 +26,25 @@ module Admin
       end
     end
 
+    # Load the question and its options
     def edit
-      # Load the question and its options
       @options = @question.options
     end
-  
+
     def show; end
 
+    # Handle the update logic for both the question and its options
     def update
-      # Handle the update logic for both the question and its options
       if @question.update(question_params)
-        redirect_to admin_project_assessment_question_path(@project, @assessment, @question), notice: 'Question and options updated successfully.'
+        redirect_to(
+          admin_project_assessment_question_path(@project, @assessment, @question),
+          notice: 'Question and options updated successfully.'
+        )
       else
         render :edit
       end
     end
-  
+
     def destroy
       @question.destroy
       redirect_to admin_project_assessments_path(@assessment), notice: 'Question was successfully destroyed.'
@@ -64,7 +69,11 @@ module Admin
     end
 
     def question_params
-      params.require(:question).permit(:content, :assessment_id, options_attributes: [:id, :content, :correct, :_destroy])
+      params.require(:question).permit(
+        :content,
+        :assessment_id,
+        options_attributes: %i[id content correct _destroy]
+      )
     end
   end
 end

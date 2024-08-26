@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# CreateUserAnswers
 class CreateUserAnswers < ActiveRecord::Migration[5.2]
   def change
     create_table :user_answers do |t|

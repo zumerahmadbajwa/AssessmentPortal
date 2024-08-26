@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Assessment Policy
 class AssessmentPolicy < ApplicationPolicy
   def attempt?
     user_assigned_to_assessment?

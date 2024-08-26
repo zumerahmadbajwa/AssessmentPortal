@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# UserAnswer Model
 class UserAnswer < ApplicationRecord
   belongs_to :user
   belongs_to :assessment

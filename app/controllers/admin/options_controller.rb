@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Admin
   # Options Controller
   class OptionsController < ApplicationController

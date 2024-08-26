@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module Admin
   # Results Controller
   class ResultsController < ApplicationController
     before_action :authenticate_user!
     before_action :find_result, only: [:destroy]
     before_action :set_project_and_assessment
-    
+
     def index
       @assessment = Assessment.find(params[:assessment_id])
       @results = @assessment.results.includes(:user_answers)
@@ -16,9 +18,12 @@ module Admin
 
     def destroy
       @result.destroy
-      redirect_to admin_project_assessment_results_path(@project, @assessment, @result), notice: 'Result was successfully destroyed.'
+      redirect_to(
+        admin_project_assessment_results_path(@project, @assessment, @result),
+        notice: 'Result was successfully destroyed.'
+      )
     end
-    
+
     private
 
     def set_project_and_assessment

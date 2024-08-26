@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# RecreateQuestions
 class RecreateQuestions < ActiveRecord::Migration[5.2]
   def change
     create_table :questions do |t|

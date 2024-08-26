@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Create JoinTable UserProject
 class CreateJoinTableUsersProjects < ActiveRecord::Migration[5.2]
   def change
     create_join_table :users, :projects do |t|
