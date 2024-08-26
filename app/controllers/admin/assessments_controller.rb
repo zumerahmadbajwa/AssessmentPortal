@@ -31,6 +31,9 @@ module Admin
     def edit; end
 
     def update
+      # Assign selected users to the assessment
+      @assessment.user_ids = params[:assessment][:user_ids]
+
       if @assessment.update(assessment_params)
         redirect_to admin_project_assessment_path(@project, @assessment), notice: 'Assessment was successfully updated.'
       else
