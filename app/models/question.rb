@@ -5,11 +5,13 @@ class Question < ApplicationRecord
   
   
   validates :content, presence: true
-  validate :validate_option_count
+  validate :only_one_correct_option
 
   private
 
-  def validate_option_count
-    errors.add(:base, "A question must have exactly 4 options") if options.size != 4
+  def only_one_correct_option
+    if options.reject(&:marked_for_destruction?).select(&:correct).size > 1
+      errors.add(:base, "Only one option can be marked as correct")
+    end
   end
 end

@@ -1,1 +1,7 @@
-<%= render 'form' %>
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark" >
+  <div class="text-light">
+    <%= link_to "Back", admin_project_assessment_path(@project, @assessment) %>
+    <h1>Edit Question</h1>
+    <%= render 'form' %>
+  </div>
+</div>

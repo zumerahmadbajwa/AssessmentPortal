@@ -25,16 +25,16 @@ module Admin
     end
 
     def edit
-      while @question.options.size < 4
-        @question.options.build
-      end
+      # Load the question and its options
+      @options = @question.options
     end
   
     def show; end
 
     def update
+      # Handle the update logic for both the question and its options
       if @question.update(question_params)
-        redirect_to admin_project_assessment_path(@assessment), notice: 'Question was successfully updated.'
+        redirect_to admin_project_assessment_question_path(@project, @assessment, @question), notice: 'Question and options updated successfully.'
       else
         render :edit
       end

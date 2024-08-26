@@ -14,6 +14,12 @@ module Admin
     end
 
     def update
+      # Handle the 'correct' attribute carefully
+      if option_params[:correct] == 'true'
+        # Ensure only one option is correct by setting all other options to false
+        @question.options.where.not(id: @option.id).update_all(correct: false)
+      end
+
       if @option.update(option_params)
         redirect_to edit_admin_question_path(@question), notice: 'Option was successfully updated.'
       else

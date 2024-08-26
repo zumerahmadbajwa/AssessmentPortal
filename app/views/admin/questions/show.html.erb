@@ -8,7 +8,7 @@
     <h3>Options</h3>
     <% @question.options.each do |option| %>
       <p>
-        <strong><%= option.content %></strong> <%= option.is_correct ? "(Correct)" : "" %>
+        <strong><%= option.content %></strong> <%= option.correct ? "(Correct)" : "" %>
       </p>
     <% end %>
   </div>
