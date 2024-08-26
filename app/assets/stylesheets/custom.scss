@@ -1,0 +1,36 @@
+
+.bgcolor {
+background-color: #452c63;
+}
+
+.form-check {
+margin-bottom: 10px;
+}
+
+.form-check-input {
+margin-right: 10px;
+}
+
+.form-check-label {
+margin-right: 20px;
+}
+
+/* coloring the link shown on table.*/
+.linkcolor {
+color: rgb(208, 203, 186);
+&:hover {
+    color: rgb(0, 0, 0);
+  }
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 4px 8px;
+  color:rgb(208, 203, 186)
+}
+
+a:hover {
+  color: black;
+}
+

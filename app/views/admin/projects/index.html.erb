@@ -1,41 +1,40 @@
-<div class="w-100 shadow mt-5 rounded border p-4 bg-dark bg-gradient">
-  <h2 class= "text-light">Projects</h2>
+<div class="w-100 shadow mt-5 rounded border p-4 bgcolor bg-gradient">
   <div class= "text-light">
     <div class="table-responsive">
+      <%= link_to '←', root_path, class: 'linkcolor' %>
       <%= search_form_for @q, url: admin_projects_path, method: :get do |f| %>
+        <h2 class= "text-light">Projects</h2>
         <div class="float-end input-group w-50 input-group-sm mb-4" >
           <%= f.search_field :title_cont, placeholder: "Search Here ", class:"form-control"%>
-          <%= f.submit 'Search', class: "btn btn-warning" %>
+          <%= f.submit 'Search', class: "btn btn-secondary" %>
         </div>
       <% end %>
       <table class="table table-sm">
-        <thead class="text-light">
+        <thead class="text-light text-center">
           <th>ID</th>
           <th>Title</th>
-          <th>Description</th>
           <th>Status</th>
           <th>Add Assessment</th>
           <th>Action</th>
         </thead>
-        <tbody class="text-light">
+        <tbody class="text-light text-center">
           <% @projects.each do |project| %>
             <tr>
               <td><%= project.id %></td>
               <td><%= project.title %></td>
-              <td><%= project.description %></td>
               <td><%= project.status %></td>
               <td>
-                <%= link_to "Assessment", admin_project_assessments_path(project) %></td>
-                <td><%= link_to "Show", admin_project_path(project) %>
-                <%= link_to "Edit", edit_admin_project_path(project) %>
-                <%= link_to 'Destroy', admin_project_path(project.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+                <%= link_to "Assessment", admin_project_assessments_path(project), class: "linkcolor" %></td>
+                <td><%= link_to "Details", admin_project_path(project), class: "linkcolor" %>
+                <%= link_to "Edit", edit_admin_project_path(project), class: "linkcolor" %>
+                <%= link_to 'Destroy', admin_project_path(project.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "linkcolor" %>
               </td>
             </tr>
           <% end %>
         </tbody>
       </table>
-      <%= link_to "Back", root_path, class: 'btn btn-secondary' %>
-      <%= link_to "New", new_admin_project_path, class: 'btn btn-secondary' %>
+      
+      <%= link_to "Add a New Project", new_admin_project_path, class: 'btn btn-light' %>
     </div>
   </div>
 </div>

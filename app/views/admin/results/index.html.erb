@@ -1,9 +1,9 @@
-<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark">
-  <%= link_to "Back", admin_project_assessment_path(@project, @assessment) %>
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-gradient bgcolor">
+  <%= link_to '←', admin_project_assessment_path(@project, @assessment), class: 'linkcolor' %>
   <h3 class= "text-light">Results for <%= @assessment.title %></h3>
 
   <table class="table table-sm">
-    <thead class= "text-light">
+    <thead class= "text-light text-center">
       <tr>
         <th>User</th>
         <th>Score</th>
@@ -12,7 +12,7 @@
         <th>Details</th>
       </tr>
     </thead>
-    <tbody class= "text-light">
+    <tbody class= "text-light text-center">
       <% @results.each do |result| %>
         <tr>
           <td><%= result.user.username %></td>
@@ -29,7 +29,7 @@
               <p><%= correct_option ? correct_option.content : 'No correct option' %></p>
             <% end %>
           </td>
-          <td><%= link_to 'View', admin_project_assessment_result_path(@project, @assessment, result) %></td>
+          <td><%= link_to 'View', admin_project_assessment_result_path(@project, @assessment, result), class: 'linkcolor' %></td>
         </tr>
       <% end %>
     </tbody>

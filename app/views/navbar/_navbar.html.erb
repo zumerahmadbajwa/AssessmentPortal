@@ -9,9 +9,9 @@
 					<div href="#" class="nav-link align-middle px-0">
 						<i class="fs-4 bi-house"></i> 
 						<span class="ms-1 d-none d-sm-inline">
-							<%= link_to "Projects", admin_projects_path, class: "nav-link adminprojectpath" %>
+							<%= link_to "Projects", admin_projects_path, class: "nav-link linkcolor adminprojectpath" %>
 							<% if @project && @assessment %>
-								<%= link_to 'Results', admin_project_assessment_results_path(@project, @assessment), class: 'nav-link' %>
+								<%= link_to 'Results', admin_project_assessment_results_path(@project, @assessment), class: 'nav-link linkcolor' %>
 							<% end %>
 						</span>
 					</div>
@@ -33,8 +33,8 @@
 	<% if user_signed_in? %>
 		<div class="dropdown pb-4">
 			<span class="d-none d-sm-inline mx-1">
-				<%= link_to "Back", root_path, class: 'btn btn-secondary'%>
-				<%= link_to "Signout", destroy_user_session_path, method: 'delete', class: 'btn btn-secondary'%>
+				<%= link_to "Back", root_path, class: 'btn btn-light'%>
+				<%= link_to "Signout", destroy_user_session_path, method: 'delete', class: 'btn btn-light'%>
 			</span>
 		</div>
 	<% end %>
@@ -43,12 +43,12 @@
 			<a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 				<span class="d-none d-sm-inline mx-1">SignIn</span>
 			</a>
-			<ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-				<li><div class="dropdown-item" href="#"><%= link_to "New to Portal", new_user_registration_path %></div></li>
+			<ul class="dropdown-menu dropdown-menu text-small shadow">
+				<li><div class="dropdown-item" href="#"><%= link_to "New to Portal", new_user_registration_path, class: "mx-2 ml-3 btn btn-block" %></div></li>
 				<li><hr class="dropdown-divider"></li>
 				<li>
 					<div class="dropdown-item">
-						<%= link_to "Log In", new_user_session_path, class: "mx-2 ml-3" %>
+						<%= link_to "Log In", new_user_session_path, class: "mx-2 ml-3 btn btn-block" %>
 					</div>
 				</li>
 			</ul>

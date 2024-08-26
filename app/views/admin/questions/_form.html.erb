@@ -1,4 +1,4 @@
-<%= form_for([@project, @assessment, @question], url: admin_project_assessment_question_path(@project, @assessment, @question), html: { local: true }) do |form| %>
+<%= form_for([@project, @assessment, @question], url: admin_project_assessment_questions_path(@project, @assessment), method: :post, html: { local: true }) do |form| %>
   <% if @question.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
@@ -29,6 +29,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit class: 'btn btn-secondary' %>
+    <%= form.submit class: 'btn btn-light' %>
   </div>
 <% end %>

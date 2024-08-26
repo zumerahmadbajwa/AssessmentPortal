@@ -1,4 +1,4 @@
-<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark bg-gradient" >
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bgcolor bg-gradient" >
   <div class= "text-light">
     <h1>Users for Project: <%= @project.title %></h1>
 
@@ -17,7 +17,7 @@
             <td><%= user.username %></td>
             <td><%= user.email %></td>
             <td>
-              <%= link_to 'Remove', admin_project_project_user_path(@project, user), method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to 'Remove', admin_project_project_user_path(@project, user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'linkcolor' %>
             </td>
           </tr>
         <% end %>
@@ -32,7 +32,7 @@
       </div>
 
       <div class="actions">
-        <%= form.submit 'Add User' %>
+        <%= form.submit 'Add User btn btn-light' %>
       </div>
     <% end %>
   </div>

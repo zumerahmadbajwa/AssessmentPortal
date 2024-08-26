@@ -1,4 +1,4 @@
-<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark">  
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-gradient bgcolor">  
   <h2 class="text-center text-light"><b>Welcome To The AssessmentPortal</b></h2>
   <div class="text-light">
     <div class="text-center">
@@ -15,7 +15,7 @@
           <ol>
             <% @assessments.each do |assessment| %>
               <li><%= assessment.title %>
-              <%= link_to "Attempt", attempt_assessment_path(assessment.id) %></li>
+              <%= link_to "Attempt", attempt_assessment_path(assessment.id), class: 'linkcolor' %></li>
             <% end %>
           </ol>
         <% else %>

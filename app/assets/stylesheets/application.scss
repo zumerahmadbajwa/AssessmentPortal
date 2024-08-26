@@ -14,15 +14,4 @@
  *= require_self
  */
  @import "bootstrap";
-
- .form-check {
-  margin-bottom: 10px;
-}
-
-.form-check-input {
-  margin-right: 10px;
-}
-
-.form-check-label {
-  margin-right: 20px;
-}
+ @import "custom";

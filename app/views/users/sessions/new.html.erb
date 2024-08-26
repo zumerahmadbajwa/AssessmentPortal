@@ -1,5 +1,5 @@
 <h1 class="text-center"><b>Welcome to AssessmentPortal</b></h1>
-<div class="container-fluid w-25 text-center shadow mt-5 rounded border p-4 bg-dark">  
+<div class="container-fluid w-25 text-center shadow mt-5 rounded border p-4 bg-gradient bgcolor">  
   <h2 class='text-light'>Log in</h2>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -21,7 +21,7 @@
     <% end %>
 
     <div class="actions mb-2 text-light">
-      <%= f.submit "Log in" %>
+      <%= f.submit "Log in", class: 'btn btn-light' %>
     </div>
   <% end %>
 
