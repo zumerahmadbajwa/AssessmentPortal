@@ -3,15 +3,18 @@
 module Admin
   # Options Controller
   class OptionsController < ApplicationController
+    before_action :find_project
+    before_action :find_assessment
     before_action :find_question
     before_action :find_option, only: %i[edit update destroy]
 
     def create
       @option = @question.options.build(option_params)
       if @option.save
-        redirect_to edit_admin_question_path(@question), notice: 'Option was successfully created.'
+        redirect_to admin_project_assessment_path(@project, @assessment, @question), notice: 'Option was successfully created.'
       else
-        render :edit
+        flash.now[:alert] = 'Error creating option.'
+        render :new
       end
     end
 
@@ -23,7 +26,7 @@ module Admin
       end
 
       if @option.update(option_params)
-        redirect_to edit_admin_question_path(@question), notice: 'Option was successfully updated.'
+        redirect_to admin_project_assessment_path(@project, @assessment, @question), notice: 'Option was successfully updated.'
       else
         render :edit
       end
@@ -31,10 +34,18 @@ module Admin
 
     def destroy
       @option.destroy
-      redirect_to edit_admin_question_path(@question), notice: 'Option was successfully destroyed.'
+      redirect_to admin_project_assessment_questions_path(@question), notice: 'Option was successfully destroyed.'
     end
 
     private
+
+    def find_project
+      @project = Project.find(params[:project_id])
+    end
+
+    def find_assessment
+      @assessment = Assessment.find(params[:assessment_id])
+    end
 
     def find_question
       @question = Question.find(params[:question_id])
