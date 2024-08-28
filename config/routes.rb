@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'home#index'
   namespace :admin do
+    resources :users
     resources :projects do
       resources :project_users, only: %i[index create destroy]
       resources :assessments do

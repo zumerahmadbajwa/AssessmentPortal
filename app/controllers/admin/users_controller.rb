@@ -6,7 +6,8 @@ module Admin
     before_action :find_user, only: %i[show edit update destroy]
 
     def index
-      @users = User.all
+      @q = User.ransack(params[:q])
+      @users = @q.result
     end
 
     def new
