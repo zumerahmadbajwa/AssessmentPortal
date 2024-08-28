@@ -3,7 +3,7 @@
 module Admin
   # ProjectUser Controller
   class ProjectUsersController < ApplicationController
-    before_action :set_project
+    before_action :find_project
 
     def index
       @project_users = @project.users
@@ -30,7 +30,7 @@ module Admin
 
     private
 
-    def set_project
+    def find_project
       @project = Project.find(params[:project_id])
     end
   end

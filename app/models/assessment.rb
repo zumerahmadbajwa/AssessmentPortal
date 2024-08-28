@@ -9,4 +9,7 @@ class Assessment < ApplicationRecord
   has_many :user_assessments
   has_many :users, through: :user_assessments
   has_many :results
+
+  # validation
+  validates :title, presence: true
 end

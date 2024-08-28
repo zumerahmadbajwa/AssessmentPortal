@@ -33,7 +33,7 @@ module Admin
     def edit; end
 
     def update
-      # Assign selected users to the assessment
+      # Assign selected users to the assessment and handle the many-to many relationship
       @assessment.user_ids = params[:assessment][:user_ids]
 
       if @assessment.update(assessment_params)
