@@ -19,7 +19,7 @@ module Admin
     def destroy
       @result.destroy
       redirect_to(
-        admin_project_assessment_results_path(@project, @assessment, @result),
+        admin_project_assessment_results_path(@project, @assessment),
         notice: 'Result was successfully destroyed.'
       )
     end
