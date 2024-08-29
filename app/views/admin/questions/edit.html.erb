@@ -2,6 +2,6 @@
   <div class="text-light">
     <%= link_to '←', admin_project_assessment_path(@project, @assessment), class: 'linkcolor' %>
     <h1>Edit Question</h1>
-    <%= render 'form' %>
+    <%= render 'form', form_url: admin_project_assessment_question_path(@project, @assessment, @question), form_method: :patch %>
   </div>
 </div>

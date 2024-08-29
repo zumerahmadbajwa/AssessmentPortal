@@ -1,4 +1,4 @@
-<%= form_for([@project, @assessment, @question], url: admin_project_assessment_questions_path(@project, @assessment), method: :post, html: { local: true }) do |form| %>
+<%= form_for([@project, @assessment, @question], url: form_url, method: form_method, local: true) do |form| %>
   <% if @question.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
@@ -10,8 +10,9 @@
       </ul>
     </div>
   <% end %>
+
   <div class="field">
-    <%= form.label :content, "Write Question Content" %> 
+    <%= form.label :content, "Write Question Content" %>
     <%= form.text_area :content %>
   </div>
 
@@ -19,11 +20,14 @@
   <div id="options">
     <%= form.fields_for :options do |option_form| %>
       <div class="field">
-        <%= option_form.label :content, "Option Content" %>
+        <%= option_form.hidden_field :id %> <!-- Include the ID for updates -->
         <%= option_form.text_field :content %>
 
         <%= option_form.check_box :correct %>
         <%= option_form.label :correct, "Correct?" %>
+        
+        <%= option_form.check_box :_destroy %>
+        <%= option_form.label :_destroy, "Remove this option?" %>
       </div>
     <% end %><br>
   </div>
