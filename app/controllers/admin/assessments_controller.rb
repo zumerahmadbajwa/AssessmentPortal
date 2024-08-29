@@ -44,8 +44,11 @@ module Admin
     end
 
     def destroy
-      @assessment.destroy
-      redirect_to admin_project_assessments_path(@project), notice: 'Assessment was successfully deleted.'
+      if @assessment.destroy
+        redirect_to admin_project_assessments_path(@project), notice: 'Assessment was successfully deleted.'
+      else
+        redirect_to admin_project_assessments_path(@project), alert: 'Failed to delete the assessment.'
+      end
     end
 
     private
