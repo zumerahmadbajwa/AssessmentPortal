@@ -82,6 +82,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise_invitable (2.0.9)
+      actionmailer (>= 5.0)
+      devise (>= 4.6)
     diff-lcs (1.5.1)
     erubi (1.13.0)
     execjs (2.8.1)
@@ -297,6 +300,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   coffee-rails (~> 4.2)
   devise
+  devise_invitable (~> 2.0.0)
   factory_bot_rails (~> 5.0)
   jbuilder (~> 2.5)
   jquery-rails

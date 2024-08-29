@@ -1,0 +1,15 @@
+<div class="w-100 shadow mt-5 rounded border p-4 bgcolor bg-gradient">
+  <div class="text-light">
+    <%= link_to '←', admin_users_path  %>
+    <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f| %>
+      <%= devise_error_messages! %>
+      <div class="form-group mb-3 text-start">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Send Invitation", class: 'btn btn-light' %>
+      </div>
+    <% end %>
+  </div>
+</div>
