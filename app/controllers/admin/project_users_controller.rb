@@ -12,7 +12,7 @@ module Admin
 
     def create
       user = User.find(params[:user_id])
-      if @project.users.include?(user)
+      unless @project.users.include?(user)
         @project.users << user
         flash[:notice] = 'User was successfully added to the project.'
       else
