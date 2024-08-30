@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get :delete_modal
       resources :project_users, only: %i[index create destroy]
       resources :assessments do
+        get :delete_modal
         resources :results, only: %i[index show destroy]
         resources :questions do
           resources :options, only: %i[create update destroy]

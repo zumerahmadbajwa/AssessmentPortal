@@ -20,10 +20,7 @@ module Admin
     def create
       @assessment = @project.assessments.new(assessment_params)
       if @assessment.save
-        if params[:assessment][:user_ids]
-          additional_users = User.where(id: params[:assessment][:user_ids])
-          @assessment.users << additional_users
-        end
+        assign_users if params[:assessment][:user_ids].present?
         redirect_to admin_project_assessment_path(@project, @assessment), notice: 'Assessment was successfully created.'
       else
         render :new
@@ -51,7 +48,21 @@ module Admin
       end
     end
 
+    def delete_modal
+      @assessment = @project.assessments.find(params[:assessment_id])
+    end
+
     private
+
+    def assign_users
+      user_ids = params[:assessment][:user_ids].map(&:to_i) # Ensure IDs are integers
+      additional_users = User.where(id: user_ids)
+      
+      # Add users that are not already associated
+      additional_users.each do |user|
+        @assessment.users << user unless @assessment.users.include?(user)
+      end
+    end
 
     def find_project
       @project = Project.find(params[:project_id])

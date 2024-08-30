@@ -15,7 +15,7 @@
           <td>
             <%= link_to "Show", admin_project_assessment_path(@project, assessment), class: 'linkcolor' %>
             <%= link_to 'Edit', edit_admin_project_assessment_path(@project, assessment), class: 'linkcolor' %>
-            <%= link_to 'Delete', admin_project_assessment_path(@project, assessment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'linkcolor' %>
+            <%= link_to 'Delete', admin_project_assessment_delete_modal_path(@project, assessment.id), remote: true, class: 'linkcolor' %>
           </td>
         </tr>
       <% end %>
@@ -24,3 +24,4 @@
   
   <%= link_to 'Add a New Assessment', new_admin_project_assessment_path(@project, @assessment), class: 'btn btn-light' %>
 </div>
+<div id='open-delete-modal'></div>
