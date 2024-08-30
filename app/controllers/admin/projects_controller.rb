@@ -49,6 +49,10 @@ module Admin
       end
     end
 
+    def delete_modal
+      @project = Project.find(params[:project_id])
+    end
+
     private
 
     def find_project

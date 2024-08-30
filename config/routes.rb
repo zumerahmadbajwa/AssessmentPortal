@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get :delete_modal
     end
     resources :projects do
+      get :delete_modal
       resources :project_users, only: %i[index create destroy]
       resources :assessments do
         resources :results, only: %i[index show destroy]

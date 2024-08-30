@@ -27,7 +27,7 @@
                 <%= link_to "Assessment", admin_project_assessments_path(project), class: "linkcolor" %></td>
                 <td><%= link_to "Details", admin_project_path(project), class: "linkcolor" %>
                 <%= link_to "Edit", edit_admin_project_path(project), class: "linkcolor" %>
-                <%= link_to 'Destroy', admin_project_path(project.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "linkcolor" %>
+                <%= link_to 'Delete', admin_project_delete_modal_path(project.id), remote: true, class: "linkcolor" %>
               </td>
             </tr>
           <% end %>
@@ -38,3 +38,4 @@
     </div>
   </div>
 </div>
+<div id='open-delete-modal'></div>
