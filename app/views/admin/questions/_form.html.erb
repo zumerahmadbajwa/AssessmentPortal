@@ -1,29 +1,34 @@
-<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark" >
-  <div class="text-light">
-    <h1>Add New Question</h1>
+<%= form_for([@project, @assessment, @question], url: admin_project_assessment_questions_path(@project, @assessment), method: :post, html: { local: true }) do |form| %>
+  <% if @question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
 
-    <%= form_for([@project, @assessment, @question], url: admin_project_assessment_questions_path(@project, @assessment), html: { local: true }) do |form| %>
-      <div class="field">
-        <%= form.label :content, "Question Content" %>
-        <%= form.text_area :content %>
-      </div>
-
-      <h3>Options</h3>
-      <div id="options">
-        <%= form.fields_for :options do |option_form| %>
-          <div class="field">
-            <%= option_form.label :content, "Option Content" %>
-            <%= option_form.text_field :content %>
-            <%= option_form.check_box :correct %>
-            <%= option_form.label :correct, "Correct?" %>
-            <%= option_form.hidden_field :_destroy %>
-          </div>
+      <ul>
+        <% @question.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
-      </div>
-
-      <div class="actions">
-        <%= form.submit %>
-      </div>
-    <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.label :content, "Write Question Content" %> 
+    <%= form.text_area :content %>
   </div>
-</div>
+
+  <h3>Options</h3>
+  <div id="options">
+    <%= form.fields_for :options do |option_form| %>
+      <div class="field">
+        <%= option_form.label :content, "Option Content" %>
+        <%= option_form.text_field :content %>
+
+        <%= option_form.check_box :correct %>
+        <%= option_form.label :correct, "Correct?" %>
+      </div>
+    <% end %><br>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: 'btn btn-light' %>
+  </div>
+<% end %>

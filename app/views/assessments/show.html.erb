@@ -1,6 +1,6 @@
-<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark bg-gradient" >
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bgcolor bg-gradient" >
   <div class="text-light">
-  <%= link_to "Back", root_path %>
+  <%= link_to '←', root_path, class: 'linkcolor' %>
     <%= form_for @assessment, url: attempt_assessment_path(@assessment), method: :post do |form| %>
   <% @assessment.questions.each do |question| %>
     <div class="question">
@@ -17,7 +17,7 @@
     </div>
   <% end %>
 
-  <%= form.submit "Submit" %>
+  <%= form.submit "Submit", class: 'btn btn-light mt-4' %>
 <% end %>
   </div>
 </div>

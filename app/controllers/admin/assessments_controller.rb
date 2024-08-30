@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Admin
   # Assessment Controller
   class AssessmentsController < ApplicationController
     before_action :find_project
-    before_action :find_assessment, only: [:show, :edit, :update, :destroy]
+    before_action :find_assessment, only: %i[show edit update destroy]
 
     def index
       @assessments = @project.assessments
@@ -31,6 +33,9 @@ module Admin
     def edit; end
 
     def update
+      # Assign selected users to the assessment
+      @assessment.user_ids = params[:assessment][:user_ids]
+
       if @assessment.update(assessment_params)
         redirect_to admin_project_assessment_path(@project, @assessment), notice: 'Assessment was successfully updated.'
       else
@@ -51,12 +56,17 @@ module Admin
 
     def find_assessment
       @assessment = @project.assessments.find(params[:id])
-      rescue ActiveRecord::RecordNotFound
-        redirect_to admin_project_path(@project), alert: 'Assessment not found.'
+    rescue ActiveRecord::RecordNotFound
+      redirect_to admin_project_path(@project), alert: 'Assessment not found.'
     end
 
     def assessment_params
-      params.require(:assessment).permit(:title, :description, user_ids: [], questions_attributes: [:id, :content, :_destroy])
+      params.require(:assessment).permit(
+        :title,
+        :description,
+        user_ids: [],
+        questions_attributes: %i[id content _destroy]
+      )
     end
   end
 end

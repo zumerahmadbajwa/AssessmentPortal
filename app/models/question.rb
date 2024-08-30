@@ -1,15 +1,20 @@
+# frozen_string_literal: true
+
+# Question Model
 class Question < ApplicationRecord
   belongs_to :assessment
   has_many :options, dependent: :destroy
   accepts_nested_attributes_for :options, allow_destroy: true
-  
-  
+
+  # Validation
   validates :content, presence: true
-  validate :validate_option_count
+  validate :only_one_correct_option
 
   private
 
-  def validate_option_count
-    errors.add(:base, "A question must have exactly 4 options") if options.size != 4
+  def only_one_correct_option
+    return unless options.reject(&:marked_for_destruction?).select(&:correct).size > 1
+
+    errors.add(:base, 'There can only be one correct option per question')
   end
 end

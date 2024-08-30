@@ -1,22 +1,23 @@
-<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark bg-gradient" >
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bgcolor bg-gradient" >
 <h1>Questions for Assessment</h1>
 
-<%= link_to 'New Question', new_admin_project_assessment_question_path(@assessment) %>
+<%= link_to 'New Question', new_admin_project_assessment_question_path(@assessment), class: 'linkcolor' %>
 
-<table>
-  <thead>
+<table class="table table-sm">
+  <thead class="text-light text-center">
     <tr>
-      <th>Content</th>
+      <th>Question</th>
       <th>Actions</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="text-light text-center">
     <% @questions.each do |question| %>
       <tr>
         <td><%= question.content %></td>
         <td>
-          <%= link_to 'Edit', edit_admin_project_assessment_question_path(@project, @assessment, question) %> |
-          <%= link_to 'Delete', admin_project_assessment_question_path(@project, @assessment, question), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'show', edit_admin_project_assessment_question_path(@project, @assessment, question), class: 'linkcolor' %>
+          <%= link_to 'Edit', edit_admin_project_assessment_question_path(@project, @assessment, question), class: 'linkcolor' %>
+          <%= link_to 'Delete', admin_project_assessment_question_path(@project, @assessment, question), method: :delete, data: { confirm: 'Are you sure?' }, class: 'linkcolor' %>
         </td>
       </tr>
     <% end %>

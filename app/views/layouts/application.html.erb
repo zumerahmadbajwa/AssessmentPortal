@@ -5,7 +5,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -14,7 +14,7 @@
     <p class="alert"><%= alert %></p>
     <div class="container-fluid">
       <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark rounded border bg-gradient">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bgcolor rounded border bg-gradient">
           <%= render 'navbar/navbar', project: @project, assessment: @assessment, result: @result %>
         </div>
         <main class="col px-4">

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -9,8 +11,9 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
+# rubocop:disable all
 
-ActiveRecord::Schema.define(version: 2024_08_15_083601) do
+ActiveRecord::Schema.define(version: 2024_08_22_105607) do
 
   create_table "assessments", force: :cascade do |t|
     t.string "title"
@@ -67,6 +70,20 @@ ActiveRecord::Schema.define(version: 2024_08_15_083601) do
     t.datetime "updated_at", null: false
     t.index ["assessment_id"], name: "index_results_on_assessment_id"
     t.index ["user_id"], name: "index_results_on_user_id"
+  end
+
+  create_table "user_answers", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "assessment_id", null: false
+    t.integer "question_id", null: false
+    t.integer "selected_option_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "result_id"
+    t.index ["assessment_id"], name: "index_user_answers_on_assessment_id"
+    t.index ["question_id"], name: "index_user_answers_on_question_id"
+    t.index ["selected_option_id"], name: "index_user_answers_on_selected_option_id"
+    t.index ["user_id"], name: "index_user_answers_on_user_id"
   end
 
   create_table "user_assessments", force: :cascade do |t|

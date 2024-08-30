@@ -1,22 +1,44 @@
-<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark">
-  <%= link_to "Back", admin_project_assessments_path %>
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bgcolor bg-gradient">
+  <%= link_to '←', admin_project_assessments_path, class: 'linkcolor' %>
   <div class="text-light">
-    <h3>Assessmt:<%= @assessment.id %></h3>
+    <h3>Assessment:<%= @assessment.id %></h3>
     <p><b>Assessment_Title: </b><%= @assessment.title %></p>
     <p><b>Assessment_Description: </b><%= @assessment.description %></p>
-    <p><b>Associated User: </b>
-      <% @assessment.users.each do |user| %>
-        <p><b>User_ID: </b><%= user.id %>
-        <p><b>Username: </b><%= user.username %>
-      <% end %>
+    <h4>Associated User</h4>
+    <table class="table table-sm">
+      <thead class="text-light text-center">
+        <th>User ID</th>
+        <th>Username</th>
+      </thead>
+      <tbody class="text-light text-center">
+        <% @assessment.users.each do |user| %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= user.username %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
     </p>
-    <%= link_to 'Add Question', new_admin_project_assessment_question_path(@project, @assessment) %>
-    <% @assessment.questions.each do |question| %>
-      <div class="question">
-        <h3><%= question.content %></h3>
-        <%= link_to 'Edit', edit_admin_project_assessment_question_path(@project, @assessment, question) %>
-        <%= link_to 'Delete', admin_project_assessment_question_path(@project, @assessment, question), method: :delete, data: { confirm: 'Are you sure?' } %>
-      </div>
-    <% end %>
+    <h3>List of questions...</h3>
+    <table class="table table-sm">
+      <thead class="text-light text-center">
+        <th>Question</th>
+        <th>Action</th>
+      </thead>
+      <tbody class="text-light text-center">
+        <% @assessment.questions.each do |question| %>
+          <tr>
+            <td><%= question.content %></td>
+            <td>
+              <%= link_to 'Details', admin_project_assessment_question_path(@project, @assessment, question), class: 'linkcolor' %>
+              <%= link_to 'Edit', edit_admin_project_assessment_question_path(@project, @assessment, question), class: 'linkcolor' %>
+              <%= link_to 'Delete', admin_project_assessment_question_path(@project, @assessment, question), method: :delete, data: { confirm: 'Are you sure?' }, class: 'linkcolor' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= link_to 'Add Question', new_admin_project_assessment_question_path(@project, @assessment), class: 'btn btn-light' %>
   </div>
  </div>

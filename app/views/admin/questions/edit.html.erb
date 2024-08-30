@@ -1,1 +1,7 @@
-<%= render 'form' %>
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-gradient bgcolor" >
+  <div class="text-light">
+    <%= link_to '←', admin_project_assessment_path(@project, @assessment), class: 'linkcolor' %>
+    <h1>Edit Question</h1>
+    <%= render 'form' %>
+  </div>
+</div>

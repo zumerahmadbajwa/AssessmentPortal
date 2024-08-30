@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Drop JoinTable UsersProjects
 class DropJoinTableUsersProjects < ActiveRecord::Migration[5.2]
   def up
     drop_table :projects_users, if_exists: true

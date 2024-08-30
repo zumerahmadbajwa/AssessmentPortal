@@ -1,17 +1,22 @@
-<div class="container-fluid w-50 shadow mt-5 rounded border p-4 bg-dark">  
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-gradient bgcolor">  
 	<h2 class='text-light'>Sign up</h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "users/shared/error_messages", resource: resource %>
 
-    <div class="form-outline mb-4 text-light">
-      <%= f.label :username %><br />
-      <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
+    <div class="row mb-4 text-light">
+      <div class="col">
+        <div class="form-outline">
+          <%= f.label :username %><br />
+          <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
+        </div>
+      </div>
+      <div class="col">
+      <div class="form-outline">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
     </div>
-
-    <div class="form-outline mb-4 text-light">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
     </div>
 
     <div class="row mb-4 text-light">
@@ -24,19 +29,21 @@
           <%= f.password_field :password, autocomplete: "new-password" %>
         </div>
       </div>
-    </div>
-
-    <div class="col">
-      <div class="form-outline">
-        <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      <div class="col">
+        <div class="form-outline">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        </div>
       </div>
     </div>
+    <div class="form-outline mb-2 text-light">
+      <p class="small mb-5 pb-lg-2">Hint: The password should be at least 6 characters long. There must be alphabets and numeric values included...</p>
+    </div> 
 
     <div class="actions mb-2 text-light">
-      <%= f.submit "Sign up" %>
+      <%= f.submit "Sign up", class: 'btn btn-light mb-2' %>
     </div>
   <% end %>
 
-  <%= render "users/shared/links" %>
+  <%= render "users/shared/links", class: 'btn btn-primary btn-block mb-2 linkcolor' %>
 </div>

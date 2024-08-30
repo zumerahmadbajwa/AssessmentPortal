@@ -1,22 +1,35 @@
-<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark">
-  <h1 class= "text-light">Results for Assessment: <%= @assessment.title %></h1>
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-gradient bgcolor">
+  <%= link_to '←', admin_project_assessment_path(@project, @assessment), class: 'linkcolor' %>
+  <h3 class= "text-light">Results for <%= @assessment.title %></h3>
 
   <table class="table table-sm">
-    <thead class= "text-light">
+    <thead class= "text-light text-center">
       <tr>
         <th>User</th>
         <th>Score</th>
         <th>Answers</th>
+        <th>Correct Answers</th>
+        <th>Details</th>
       </tr>
     </thead>
-    <tbody class= "text-light">
+    <tbody class= "text-light text-center">
       <% @results.each do |result| %>
         <tr>
           <td><%= result.user.username %></td>
           <td><%= result.score %></td>
-          <td><%= result.answers %></td>
-          <td><%= link_to 'Destroy', admin_project_assessment_result_path(@project, @assessment, result), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <td><%= link_to 'View', admin_project_assessment_result_path(@project, @assessment, result) %></td>
+          <td>
+            <% result.user_answers.each do |answer| %>
+              <% selected_option = answer.selected_option %>
+              <p><%= selected_option ? selected_option.content : 'No answer selected' %></p>
+            <% end %>
+          </td>
+          <td>
+            <% result.user_answers.each do |answer| %>
+              <% correct_option = answer.question.options.find_by(correct: true) %>
+              <p><%= correct_option ? correct_option.content : 'No correct option' %></p>
+            <% end %>
+          </td>
+          <td><%= link_to 'View', admin_project_assessment_result_path(@project, @assessment, result), class: 'linkcolor' %></td>
         </tr>
       <% end %>
     </tbody>

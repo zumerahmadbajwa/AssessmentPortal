@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Assessment Model
 class Assessment < ApplicationRecord
   belongs_to :project
   has_many :questions, dependent: :destroy

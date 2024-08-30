@@ -1,20 +1,23 @@
-<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark">  
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-gradient bgcolor">  
   <h2 class="text-center text-light"><b>Welcome To The AssessmentPortal</b></h2>
-  <div class="text-light text-center">
-    <% if user_signed_in? %>
-      <%= current_user.email %>
-      <% if current_user.admin? %>
-        <h4>You're in Admin Panel</h4>
-      <% else %>
-        <h4>You're in User Panel</h4>
+  <div class="text-light">
+    <div class="text-center">
+      <% if user_signed_in? %>
+        <%= current_user.email %>
+        <% if current_user.admin? %>
+          <h4>You're in Admin Panel</h4>
+        <% else %>
+          <h4>You're in User Panel</h4>
+      </div>
         <h1>Your Assessments</h1>
-
+        
         <% if @assessments.any? %>
-          <ul>
+          <ol>
             <% @assessments.each do |assessment| %>
-              <li><%= link_to assessment.title, attempt_assessment_path(assessment.id) %></li>
+              <li><%= assessment.title %>
+              <%= link_to "Attempt", attempt_assessment_path(assessment.id), class: 'linkcolor' %></li>
             <% end %>
-          </ul>
+          </ol>
         <% else %>
           <p>No assessments assigned to you.</p>
         <% end %>

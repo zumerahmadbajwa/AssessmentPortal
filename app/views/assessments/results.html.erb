@@ -1,23 +1,33 @@
-<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark bg-gradient" >
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bgcolor bg-gradient" >
   <div class="text-light">
-    <%= link_to "Back", assessment_path %>
+    <%= link_to '←', root_path, class: 'linkcolor' %>
     <h1>Results for <%= @assessment.title %></h1>
     <p>Score: <%= @score %></p>
 
-    <h2>Answers:</h2>
-    <% if @answers.present? %>
-      <ul>
-        <% @answers.each do |question_id, selected_option_id| %>
-          <% question = Question.find(question_id) %>
-          <% option = Option.find(selected_option_id) %>
-          <li>
-            Question: <%= question.content %><br>
-            Selected Option: <%= option.content %>
-          </li>
+    <table class="table table-sm">
+      <thead class= "text-light">
+        <tr>
+          <th>Question</th>
+          <th>Selected Options</th>
+          <th>Correct Options</th>
+        </tr>
+      </thead>
+      <tbody class= "text-light">
+       <% @questions.each do |question| %>
+        <tr>
+          <td><%= question.content %></td>
+          <td>
+            <% user_answer = @user_answers.find { |ua| ua.question_id == question.id } %>
+            <%= user_answer.present? ? user_answer.selected_option.content : "No answer selected" %>
+          </td>
+          <td>
+            <% correct_option = question.options.find_by(correct: true) %>
+            <%= correct_option.content %>
+          </td>
+        </tr>
         <% end %>
-      </ul>
-    <% else %>
-      <p>No answers provided.</p>
-    <% end %>
+      </tbody>
+    </table>
+    <%= link_to "Show Correct Answers", assessment_path, class: 'linkcolor' %>
   </div>
 </div>

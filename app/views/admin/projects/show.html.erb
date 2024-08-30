@@ -1,5 +1,5 @@
-<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-dark">
-  <%= link_to "Back", admin_projects_path %>
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bgcolor">
+  <%= link_to '←', :back, class: 'linkcolor' %>
   <div class="text-light text-center">
     <h3>Project:<%= @project.id %></h3>
     <p><b>Project_Title: </b><%= @project.title %></p>
@@ -7,11 +7,5 @@
     <p><b>Start_date: </b><%= @project.start_date %></p>
     <p><b>End_date: </b><%= @project.end_date %></p>
     <p><b>Project_Status: </b><%= @project.status %></p>
-    <p><b>Associated User: </b>
-      <% @project.users.each do |user| %>
-        <p><b>User_ID: </b><%= user.id %>
-        <p><b>Username: </b><%= user.username %>
-      <% end %>
-    </p>
   </div>
  </div>

@@ -1,4 +1,4 @@
-<%= form_for [:admin, @project] do |f| %>
+<%= form_for([:admin, @project], html: { local: true }) do |f| %>
 
   <div class="form-outline mb-4 text-light">
     <%= f.label :Title, class: "form-label" %>
@@ -21,14 +21,11 @@
   </div>
 
   <div class="dropdown field mb-3 text-start text-light">
-    <%= f.label :Select_Status, class: "form-label" %><br />
+    <%= f.label :Select_Status, class: "form-label" %>
     <%= f.select :status, ['planned', 'active', 'completed'] %>
   </div>
 
-  <div class="dropdown field mb-3 text-start text-light">
-    <%= f.label :select_user, class: "form-label" %><br />
-    <%= f.collection_select :user_ids, User.all, :id, :email, { multiple: true }, { size: 10 } %>
+  <div class="actions">
+    <%= f.submit class: 'btn btn-light' %>
   </div>
-
-  <%= f.submit "Create Project", class: 'actions mb-2 text-dark btn btn-warning mt-3' %>
 <% end %>

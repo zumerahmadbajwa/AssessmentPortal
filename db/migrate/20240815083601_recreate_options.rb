@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# RecreateOptions
 class RecreateOptions < ActiveRecord::Migration[5.2]
   def change
     create_table :options do |t|

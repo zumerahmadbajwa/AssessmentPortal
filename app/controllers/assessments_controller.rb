@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 # Assessment Controller
 class AssessmentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_assessment, only: [:show, :attempt, :submit, :results]
-  
+  before_action :find_assessment, only: %i[show attempt submit results]
+
   def show
     @questions = @assessment.questions.includes(:options)
   end
@@ -14,31 +16,58 @@ class AssessmentsController < ApplicationController
   end
 
   def submit
-    user_answers = permitted_params[:answers] || {}
+    user_answers = permitted_params[:answers].to_unsafe_h || {}
+    @result = create_result
 
-    serialized_answers = user_answers.to_json # Serialize answers to JSON
-
-    @score = calculate_score(user_answers)
-
-    @result = @assessment.results.create(
-      user: current_user,
-      score: @score,
-      answers: serialized_answers
-    )
-    if @result.save
-      redirect_to results_assessment_path(@assessment, score: @score, answers: serialized_answers)
+    if @result.persisted?
+      save_user_answers(user_answers)
+      update_result(user_answers)
+      redirect_to results_assessment_path(@assessment, score: @score)
     else
-      flash[:alert] = 'Error saving result. Please try again.'
-      render :attempt
+      redirect_to attempt_assessment_path(@assessment)
     end
   end
 
   def results
     @score = params[:score].to_i
-    @answers = JSON.parse(params[:answers] || '{}') 
+    @user_answers = UserAnswer.where(user: current_user, assessment: @assessment)
+    @questions = @assessment.questions.includes(:options)
   end
 
   private
+
+  def create_result
+    Result.create(user: current_user, assessment: @assessment)
+  end
+
+  def save_user_answers(user_answers)
+    user_answers.each do |question_id, option_id|
+      UserAnswer.create(
+        user: current_user,
+        assessment: @assessment,
+        question_id: question_id,
+        selected_option_id: option_id,
+        result: @result
+      )
+    end
+  end
+
+  def update_result(user_answers)
+    formatted_answers = format_answers(user_answers)
+    @score = calculate_score(user_answers)
+    @result.update(score: @score, answers: formatted_answers)
+  end
+
+  def format_answers(user_answers)
+    user_answers.map do |question_id, selected_option_id|
+      correct_option_id = find_correct_option_id(question_id.to_i)
+      "#{question_id}:#{selected_option_id}|#{correct_option_id}"
+    end.join(';')
+  end
+
+  def find_correct_option_id(question_id)
+    @assessment.questions.find(question_id).options.find_by(correct: true)&.id
+  end
 
   def find_assessment
     @assessment = Assessment.find(params[:id])
@@ -58,9 +87,7 @@ class AssessmentsController < ApplicationController
       selected_option_id = answers[question.id.to_s]
       correct_option = question.options.find_by(correct: true)
 
-      if correct_option && selected_option_id.to_i == correct_option.id
-        correct_answers += 1
-      end
+      correct_option && selected_option_id.to_i == correct_option.id && correct_answers += 1
     end
 
     correct_answers * 10
