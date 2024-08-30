@@ -74,3 +74,4 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'pundit', '~> 2.2'
 gem 'ransack'
+gem "letter_opener", group: :development
