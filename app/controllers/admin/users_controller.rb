@@ -42,6 +42,7 @@ module Admin
 
     def delete_modal
       @user = User.find(params[:user_id])
+      render partial: 'delete_modal'
     end
 
     private
