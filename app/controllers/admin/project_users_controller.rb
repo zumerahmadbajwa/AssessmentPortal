@@ -3,7 +3,7 @@
 module Admin
   # ProjectUser Controller
   class ProjectUsersController < ApplicationController
-    before_action :set_project
+    before_action :find_project
 
     def index
       @project_users = @project.users
@@ -12,7 +12,7 @@ module Admin
 
     def create
       user = User.find(params[:user_id])
-      if @project.users.include?(user)
+      unless @project.users.include?(user)
         @project.users << user
         flash[:notice] = 'User was successfully added to the project.'
       else
@@ -30,7 +30,7 @@ module Admin
 
     private
 
-    def set_project
+    def find_project
       @project = Project.find(params[:project_id])
     end
   end

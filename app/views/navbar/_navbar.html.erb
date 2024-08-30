@@ -10,9 +10,7 @@
 						<i class="fs-4 bi-house"></i> 
 						<span class="ms-1 d-none d-sm-inline">
 							<%= link_to "Projects", admin_projects_path, class: "nav-link linkcolor adminprojectpath" %>
-							<% if @project && @assessment %>
-								<%= link_to 'Results', admin_project_assessment_results_path(@project, @assessment), class: 'nav-link linkcolor' %>
-							<% end %>
+							<%= link_to "Users", admin_users_path, class: "nav-link linkcolor adminprojectpath" %>
 						</span>
 					</div>
 				</li>

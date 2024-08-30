@@ -36,10 +36,12 @@ class AssessmentsController < ApplicationController
 
   private
 
+  # Create a result record for storing user answers
   def create_result
     Result.create(user: current_user, assessment: @assessment)
   end
 
+  # Iterate over the answers and save them
   def save_user_answers(user_answers)
     user_answers.each do |question_id, option_id|
       UserAnswer.create(
@@ -58,6 +60,7 @@ class AssessmentsController < ApplicationController
     @result.update(score: @score, answers: formatted_answers)
   end
 
+  # Giving the answers format as question_id:selceted_option_id|correct_answer_id
   def format_answers(user_answers)
     user_answers.map do |question_id, selected_option_id|
       correct_option_id = find_correct_option_id(question_id.to_i)

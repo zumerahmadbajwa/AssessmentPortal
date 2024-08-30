@@ -1,0 +1,11 @@
+<div class="w-100 shadow mt-5 rounded border p-4 bgcolor bg-gradient">
+  <div class="text-light">
+    <%= link_to '←', admin_users_path, class: 'linkcolor' %>
+    <h3>User_id: <%= @user.id %></h3>
+    <hr>
+    <p> User Name: <%= @user.username %></p>
+    <p> Email: <%= @user.email %></p>
+    <p> Created at: <%= @user.created_at %></p>
+    <p> Updated at: <%= @user.updated_at %></p>
+  </div>
+</div>

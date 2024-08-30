@@ -1,0 +1,30 @@
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bgcolor bg-gradient" >
+  <%= link_to '←', admin_project_assessments_path, class: 'linkcolor' %>
+  <h1>Edit Option</h1>
+  <%= form_with(model: @option, local: true) do |form| %>
+    <% if @option.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@option.errors.count, "error") %> prohibited this option from being saved:</h2>
+        <ul>
+          <% @option.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :content %>
+      <%= form.text_field :content %>
+    </div>
+
+    <div class="field">
+      <%= form.check_box :correct %>
+      <%= form.label :correct %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+</div>

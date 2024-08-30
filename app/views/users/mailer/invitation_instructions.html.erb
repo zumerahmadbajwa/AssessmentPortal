@@ -1,0 +1,15 @@
+<p>
+  <%= t('devise.mailer.invitation_instructions.subject') %>
+</p>
+
+<p>
+  <%= t('devise.mailer.invitation_instructions.greeting', username: @resource.username) %>
+</p>
+
+<p>
+  <%= t('devise.mailer.invitation_instructions.body') %>
+</p>
+
+<p>
+  <%= link_to t('devise.mailer.invitation_instructions.accept'), accept_invitation_url(@resource, invitation_token: @token) %>
+</p>

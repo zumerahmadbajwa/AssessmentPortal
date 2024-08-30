@@ -1,6 +1,9 @@
 <div class="container-fluid w-75 shadow mt-5 rounded border p-4 bgcolor bg-gradient">
   <%= link_to '←', admin_project_assessments_path, class: 'linkcolor' %>
   <div class="text-light">
+    <div class="float-end">
+      <%= link_to 'Results for this Assessment', admin_project_assessment_results_path(@project, @assessment), class: 'nav-link linkcolor' %>
+    </div>
     <h3>Assessment:<%= @assessment.id %></h3>
     <p><b>Assessment_Title: </b><%= @assessment.title %></p>
     <p><b>Assessment_Description: </b><%= @assessment.description %></p>

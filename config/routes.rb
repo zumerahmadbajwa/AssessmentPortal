@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { invitations: 'users/invitations' }
   root to: 'home#index'
   namespace :admin do
+    resources :users
     resources :projects do
       resources :project_users, only: %i[index create destroy]
       resources :assessments do

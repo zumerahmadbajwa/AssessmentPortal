@@ -1,0 +1,22 @@
+<div class="w-100 shadow mt-5 rounded border p-4 bgcolor bg-gradient">
+  <div class="text-light">
+    <%= link_to '←', admin_users_path  %>
+  </div>
+
+  <h2 class = "text-light">User Edit</h2>
+  <%= form_for ([:admin, @user]) do |f| %>
+    <div class="form-outline mb-4 text-light">
+      <%= f.label :username %><br>
+      <%= f.text_field :username, required: true %>
+    </div>
+
+    <div class="form-outline mb-4 text-light">
+      <%= f.label :email %><br>
+      <%= f.email_field :email, required: true %>
+    </div>
+    
+    <div class="actions">
+      <%= f.submit class: 'btn btn-light' %>
+    </div>
+  <% end %>
+</div>
