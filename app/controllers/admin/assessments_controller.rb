@@ -50,6 +50,7 @@ module Admin
 
     def delete_modal
       @assessment = @project.assessments.find(params[:assessment_id])
+      render partial: 'delete_modal'
     end
 
     private

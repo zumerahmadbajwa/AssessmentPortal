@@ -162,4 +162,18 @@ RSpec.describe Admin::AssessmentsController, type: :controller do
       expect(response).to redirect_to(admin_project_assessments_path(project))
     end
   end
+
+  describe 'GET #delete_modal' do
+    before do
+      get :delete_modal, params: { project_id: project.id, assessment_id: assessment.id }
+    end
+
+    it 'assigns the requested assessment to @assessment' do
+      expect(assigns(:assessment)).to eq(assessment)
+    end
+
+    it 'renders the delete_modal template' do
+      expect(response).to render_template(partial: '_delete_modal')
+    end
+  end
 end
