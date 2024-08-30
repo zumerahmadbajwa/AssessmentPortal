@@ -4,10 +4,14 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { invitations: 'users/invitations' }
   root to: 'home#index'
   namespace :admin do
-    resources :users
+    resources :users do
+      get :delete_modal
+    end
     resources :projects do
+      get :delete_modal
       resources :project_users, only: %i[index create destroy]
       resources :assessments do
+        get :delete_modal
         resources :results, only: %i[index show destroy]
         resources :questions do
           resources :options, only: %i[create update destroy]

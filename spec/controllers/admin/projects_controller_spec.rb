@@ -144,4 +144,18 @@ RSpec.describe Admin::ProjectsController, type: :controller do
       expect(flash[:notice]).to eq('Project was successfully destroyed.')
     end
   end
+
+  describe 'GET #delete_modal' do
+    before do
+      get :delete_modal, params: { project_id: project.id }
+    end
+
+    it 'assigns the requested project to @project' do
+      expect(assigns(:project)).to eq(project)
+    end
+
+    it 'renders the delete_modal template' do
+      expect(response).to render_template(partial: '_delete_modal')
+    end
+  end
 end

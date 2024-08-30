@@ -108,4 +108,18 @@ RSpec.describe Admin::UsersController, type: :controller do
       expect(response).to redirect_to(admin_users_path)
     end
   end
+
+  describe 'GET #delete_modal' do
+    before do
+      get :delete_modal, params: { user_id: user.id }
+    end
+
+    it 'assigns the requested user to @user' do
+      expect(assigns(:user)).to eq(user)
+    end
+
+    it 'renders the delete_modal template' do
+      expect(response).to render_template(partial: '_delete_modal')
+    end
+  end
 end
