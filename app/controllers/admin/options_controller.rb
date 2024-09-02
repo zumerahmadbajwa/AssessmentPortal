@@ -11,7 +11,10 @@ module Admin
     def create
       @option = @question.options.build(option_params)
       if @option.save
-        redirect_to admin_project_assessment_path(@project, @assessment, @question), notice: 'Option was successfully created.'
+        redirect_to(
+          admin_project_assessment_path(@project, @assessment, @question),
+          notice: 'Option was successfully created.'
+        )
       else
         flash.now[:alert] = 'Error creating option.'
         render :new
@@ -19,14 +22,13 @@ module Admin
     end
 
     def update
-      # Handle the 'correct' attribute carefully
-      if option_params[:correct] == 'true'
-        # Ensure only one option is correct by setting all other options to false
-        @question.options.where.not(id: @option.id).update_all(correct: false)
-      end
+      ensure_only_one_correct_option if option_params[:correct] == 'true' # Handle the 'correct' attribute carefully
 
       if @option.update(option_params)
-        redirect_to admin_project_assessment_path(@project, @assessment, @question), notice: 'Option was successfully updated.'
+        redirect_to(
+          admin_project_assessment_path(@project, @assessment, @question),
+          notice: 'Option was successfully updated.'
+        )
       else
         render :edit
       end
@@ -38,6 +40,11 @@ module Admin
     end
 
     private
+
+    # Ensure only one option is correct by setting all other options to false
+    def ensure_only_one_correct_option
+      @question.options.where.not(id: @option.id).update_all(correct: false)
+    end
 
     def find_project
       @project = Project.find(params[:project_id])

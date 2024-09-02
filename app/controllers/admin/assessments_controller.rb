@@ -58,7 +58,7 @@ module Admin
     def assign_users
       user_ids = params[:assessment][:user_ids].map(&:to_i) # Ensure IDs are integers
       additional_users = User.where(id: user_ids)
-      
+
       # Add users that are not already associated
       additional_users.each do |user|
         @assessment.users << user unless @assessment.users.include?(user)
