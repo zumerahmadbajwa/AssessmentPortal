@@ -1,0 +1,4 @@
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/controller/admin/assessment_controller_spec.rb'
+  Max: 200
