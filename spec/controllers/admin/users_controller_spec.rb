@@ -113,7 +113,7 @@ RSpec.describe Admin::UsersController, type: :controller do
 
   describe 'GET #delete_modal' do
     before do
-      get :delete_modal, params: { user_id: user.id }
+      get :delete_modal, params: { user_id: user.id }, format: :js
     end
 
     it 'assigns the requested user to @user' do

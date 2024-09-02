@@ -165,7 +165,7 @@ RSpec.describe Admin::ProjectsController, type: :controller do
 
   describe 'GET #delete_modal' do
     before do
-      get :delete_modal, params: { project_id: project.id }
+      get :delete_modal, params: { project_id: project.id }, format: :js
     end
 
     it 'assigns the requested project to @project' do

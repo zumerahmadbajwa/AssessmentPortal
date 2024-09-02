@@ -166,7 +166,7 @@ RSpec.describe Admin::AssessmentsController, type: :controller do
 
   describe 'GET #delete_modal' do
     before do
-      get :delete_modal, params: { project_id: project.id, assessment_id: assessment.id }
+      get :delete_modal, params: { project_id: project.id, assessment_id: assessment.id }, format: :js
     end
 
     it 'assigns the requested assessment to @assessment' do

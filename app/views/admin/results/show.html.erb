@@ -1,4 +1,4 @@
-<div class="container-fluid w-50 shadow mt-5 rounded border p-4 bg-gradient bgcolor text-light">
+<div class="container-fluid w-75 shadow mt-5 rounded border p-4 bg-gradient bgcolor text-light">
   <h1>Result Details</h1>
 
   <p>
@@ -20,21 +20,27 @@
     <strong>Project:</strong>
     <%= @project.title %>
   </p>
-
-  <h3>Questions</h3>
-    <ol>
+      
+  <table class="table table-sm">
+    <thead class= "text-light text-center">
+      <th>Question</th>
+      <th>Selected Answer</th>
+      <th>Correct Answer</th>
+    </thead>
+    <tbody class= "text-light text-center">
       <% @result.user_answers.includes(:question, :selected_option).each do |user_answer| %>
-        <% question = user_answer.question %>
-        <% selected_option = user_answer.selected_option %>
-        <% correct_option = question.options.find_by(correct: true) %>
-        <li>
-          <strong>Question:</strong> <%= question.content %><br>
-          <strong>Selected Answer:</strong> <%= selected_option ? selected_option.content : 'No answer selected' %><br>
-          <strong>Correct Answer:</strong> <%= correct_option ? correct_option.content : 'No correct option' %>
-        </li>
+      <% question = user_answer.question %>
+      <% selected_option = user_answer.selected_option %>
+      <% correct_option = question.options.find_by(correct: true) %>
+        <tr>
+          <td><%= question.content %></td>
+          <td><%= selected_option ? selected_option.content : 'No answer selected' %></td>
+          <td><%= correct_option ? correct_option.content : 'No correct option' %></td>
+        </tr>
       <% end %>
-    </ol>
-
+    </tbody>
+  </table>
+  
   <p>
     <strong>Want to Delete?</strong>
     <%= link_to 'Delete', admin_project_assessment_result_path(@project, @assessment, @result), method: :delete, data: { confirm: 'Are you sure?' }, class: 'linkcolor' %>        
