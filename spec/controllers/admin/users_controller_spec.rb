@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Admin::UsersController, type: :controller do
@@ -30,9 +32,9 @@ RSpec.describe Admin::UsersController, type: :controller do
   describe 'POST #create' do
     context 'with valid attributes' do
       it 'creates a new user' do
-        expect {
+        expect do
           post :create, params: { user: attributes_for(:user) }
-        }.to change(User, :count).by(1)
+        end.to change(User, :count).by(1)
       end
 
       it 'redirects to the admin users path' do
@@ -43,9 +45,9 @@ RSpec.describe Admin::UsersController, type: :controller do
 
     context 'with invalid attributes' do
       it 'does not create a new user' do
-        expect {
+        expect do
           post :create, params: { user: attributes_for(:user, email: nil) }
-        }.not_to change(User, :count)
+        end.not_to change(User, :count)
       end
 
       it 're-renders the new template' do
@@ -98,9 +100,9 @@ RSpec.describe Admin::UsersController, type: :controller do
   describe 'DELETE #destroy' do
     it 'deletes the user' do
       user
-      expect {
+      expect do
         delete :destroy, params: { id: user.id }
-      }.to change(User, :count).by(-1)
+      end.to change(User, :count).by(-1)
     end
 
     it 'redirects to the admin users path' do

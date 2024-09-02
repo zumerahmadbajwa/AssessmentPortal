@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Admin::QuestionsController, type: :controller do
@@ -39,9 +41,9 @@ RSpec.describe Admin::QuestionsController, type: :controller do
   describe 'POST #create' do
     context 'with valid attributes' do
       it 'creates a new Question' do
-        expect {
+        expect do
           post :create, params: { project_id: project.id, assessment_id: assessment.id, question: valid_attributes }
-        }.to change(Question, :count).by(1)
+        end.to change(Question, :count).by(1)
       end
 
       it 'redirects to the assessment show page' do
@@ -52,9 +54,9 @@ RSpec.describe Admin::QuestionsController, type: :controller do
 
     context 'with invalid attributes' do
       it 'does not create a new Question' do
-        expect {
+        expect do
           post :create, params: { project_id: project.id, assessment_id: assessment.id, question: invalid_attributes }
-        }.to_not change(Question, :count)
+        end.to_not change(Question, :count)
       end
 
       it 're-renders the :new template' do
@@ -81,26 +83,46 @@ RSpec.describe Admin::QuestionsController, type: :controller do
     context 'with valid attributes' do
       it 'updates the requested question' do
         # Send a PATCH request to update the question with new attributes
-        patch :update, params: { project_id: project.id, assessment_id: assessment.id, id: question.id, question: new_attributes }
+        patch :update, params: {
+          project_id: project.id,
+          assessment_id: assessment.id,
+          id: question.id,
+          question: new_attributes
+        }
         question.reload
         expect(question.content).to eq('Updated Question')
       end
 
       it 'redirects to the question show page' do
-        patch :update, params: { project_id: project.id, assessment_id: assessment.id, id: question.id, question: new_attributes }
+        patch :update, params: {
+          project_id: project.id,
+          assessment_id: assessment.id,
+          id: question.id,
+          question: new_attributes
+        }
         expect(response).to redirect_to(admin_project_assessment_question_path(project, assessment, question))
       end
     end
 
     context 'with invalid attributes' do
       it 'does not update the question' do
-        patch :update, params: { project_id: project.id, assessment_id: assessment.id, id: question.id, question: invalid_attributes }
+        patch :update, params: {
+          project_id: project.id,
+          assessment_id: assessment.id,
+          id: question.id,
+          question: invalid_attributes
+        }
         question.reload
         expect(question.content).to_not eq('')
       end
 
       it 're-renders the :edit template' do
-        patch :update, params: { project_id: project.id, assessment_id: assessment.id, id: question.id, question: invalid_attributes }
+        patch :update, params: {
+          project_id: project.id,
+          assessment_id: assessment.id,
+          id: question.id,
+          question: invalid_attributes
+        }
         expect(response).to render_template(:edit)
       end
     end
@@ -109,9 +131,9 @@ RSpec.describe Admin::QuestionsController, type: :controller do
   describe 'DELETE #destroy' do
     it 'destroys the requested question' do
       question # Create the question before testing destruction
-      expect {
+      expect do
         delete :destroy, params: { project_id: project.id, assessment_id: assessment.id, id: question.id }
-      }.to change(Question, :count).by(-1)
+      end.to change(Question, :count).by(-1)
     end
 
     it 'redirects to the questions list' do

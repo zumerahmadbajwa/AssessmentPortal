@@ -1,10 +1,28 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Admin::ProjectsController, type: :controller do
   let(:admin) { create(:user, :admin) }
   let(:project) { create(:project) }
-  let(:valid_attributes) { { title: 'New Project', description: 'Description', start_date: Date.today, end_date: Date.tomorrow, status: 'active' } }
-  let(:invalid_attributes) { { title: '', description: '', start_date: '', end_date: '', status: '' } }
+  let(:valid_attributes) do
+    {
+      title: 'New Project',
+      description: 'Description',
+      start_date: Date.today,
+      end_date: Date.tomorrow,
+      status: 'active'
+    }
+  end
+  let(:invalid_attributes) do
+    {
+      title: '',
+      description: '',
+      start_date: '',
+      end_date: '',
+      status: ''
+    }
+  end
 
   before do
     sign_in admin
@@ -51,9 +69,9 @@ RSpec.describe Admin::ProjectsController, type: :controller do
   describe 'POST #create' do
     context 'with valid params' do
       it 'creates a new Project' do
-        expect {
+        expect do
           post :create, params: { project: valid_attributes }
-        }.to change(Project, :count).by(1)
+        end.to change(Project, :count).by(1)
       end
 
       it 'redirects to the created project' do
@@ -69,9 +87,9 @@ RSpec.describe Admin::ProjectsController, type: :controller do
 
     context 'with invalid params' do
       it 'does not create a new Project' do
-        expect {
+        expect do
           post :create, params: { project: invalid_attributes }
-        }.to change(Project, :count).by(0)
+        end.to change(Project, :count).by(0)
       end
 
       it 'renders the new template' do
@@ -129,9 +147,9 @@ RSpec.describe Admin::ProjectsController, type: :controller do
   describe 'DELETE #destroy' do
     it 'destroys the requested project' do
       project_to_destroy = create(:project)
-      expect {
+      expect do
         delete :destroy, params: { id: project_to_destroy.to_param }
-      }.to change(Project, :count).by(-1)
+      end.to change(Project, :count).by(-1)
     end
 
     it 'redirects to the projects list' do

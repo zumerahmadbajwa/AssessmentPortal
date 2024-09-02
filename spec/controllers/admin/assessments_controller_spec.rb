@@ -1,4 +1,5 @@
-# spec/controllers/admin/assessments_controller_spec.rb
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Admin::AssessmentsController, type: :controller do
@@ -49,12 +50,12 @@ RSpec.describe Admin::AssessmentsController, type: :controller do
   describe 'POST #create' do
     context 'with valid attributes' do
       it 'creates a new Assessment' do
-        expect {
+        expect do
           post :create, params: {
             project_id: project.id,
             assessment: attributes_for(:assessment)
           }
-        }.to change(Assessment, :count).by(1)
+        end.to change(Assessment, :count).by(1)
       end
 
       it 'assigns the newly created assessment as @assessment' do
@@ -76,12 +77,12 @@ RSpec.describe Admin::AssessmentsController, type: :controller do
 
     context 'with invalid attributes' do
       it 'does not save the new assessment' do
-        expect {
+        expect do
           post :create, params: {
             project_id: project.id,
             assessment: attributes_for(:assessment, title: nil)
           }
-        }.to_not change(Assessment, :count)
+        end.to_not change(Assessment, :count)
       end
 
       it 're-renders the new template' do
@@ -152,9 +153,9 @@ RSpec.describe Admin::AssessmentsController, type: :controller do
   describe 'DELETE #destroy' do
     it 'destroys the requested assessment' do
       assessment
-      expect {
+      expect do
         delete :destroy, params: { project_id: project.id, id: assessment.id }
-      }.to change(Assessment, :count).by(-1)
+      end.to change(Assessment, :count).by(-1)
     end
 
     it 'redirects to the assessments list' do
