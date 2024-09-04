@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module Users
+  # Invitation Controller
   class InvitationsController < Devise::InvitationsController
     # before_action :authorize_admin!
 
@@ -7,19 +10,6 @@ module Users
       self.resource = resource_class.new
       render :new
     end
-
-    # POST /resource/invitation
-    def create
-      super
-    end
-
-    # PUT /resource/invitation
-    # This action handles the acceptance of the invitation by the invited user
-    def update
-      super
-    end
-
-    private
 
     # # Ensures that only admins can send invitations
     # def authorize_admin!

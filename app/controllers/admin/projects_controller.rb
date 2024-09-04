@@ -4,6 +4,7 @@ module Admin
   # Project Controller
   class ProjectsController < ApplicationController
     before_action :find_project, only: %i[show edit update destroy]
+    protect_from_forgery except: :delete_modal
 
     def index
       @q = Project.ransack(params[:q])
@@ -51,7 +52,10 @@ module Admin
 
     def delete_modal
       @project = Project.find(params[:project_id])
-      render partial: 'delete_modal'
+      respond_to do |format|
+        format.js   # Render `delete_modal.js.erb` if the request is JS
+        format.html # For non-AJAX requests, render the full template if necessary
+      end
     end
 
     private

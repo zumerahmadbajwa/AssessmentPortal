@@ -5,6 +5,7 @@ module Admin
   class AssessmentsController < ApplicationController
     before_action :find_project
     before_action :find_assessment, only: %i[show edit update destroy]
+    protect_from_forgery except: :delete_modal
 
     def index
       @assessments = @project.assessments
@@ -50,7 +51,10 @@ module Admin
 
     def delete_modal
       @assessment = @project.assessments.find(params[:assessment_id])
-      render partial: 'delete_modal'
+      respond_to do |format|
+        format.js   # Render `delete_modal.js.erb` if the request is JS
+        format.html # For non-AJAX requests, render the full template if necessary
+      end
     end
 
     private
@@ -58,7 +62,7 @@ module Admin
     def assign_users
       user_ids = params[:assessment][:user_ids].map(&:to_i) # Ensure IDs are integers
       additional_users = User.where(id: user_ids)
-      
+
       # Add users that are not already associated
       additional_users.each do |user|
         @assessment.users << user unless @assessment.users.include?(user)

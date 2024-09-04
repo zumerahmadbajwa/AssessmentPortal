@@ -4,6 +4,7 @@ module Admin
   # User Controller
   class UsersController < ApplicationController
     before_action :find_user, only: %i[show edit update destroy]
+    protect_from_forgery except: :delete_modal
 
     def index
       @q = User.ransack(params[:q])
@@ -42,7 +43,10 @@ module Admin
 
     def delete_modal
       @user = User.find(params[:user_id])
-      render partial: 'delete_modal'
+      respond_to do |format|
+        format.js   # Render `delete_modal.js.erb` if the request is JS
+        format.html # For non-AJAX requests, render the full template if necessary
+      end
     end
 
     private

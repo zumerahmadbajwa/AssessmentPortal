@@ -7,8 +7,6 @@
       <tr>
         <th>User</th>
         <th>Score</th>
-        <th>Answers</th>
-        <th>Correct Answers</th>
         <th>Details</th>
       </tr>
     </thead>
@@ -17,18 +15,6 @@
         <tr>
           <td><%= result.user.username %></td>
           <td><%= result.score %></td>
-          <td>
-            <% result.user_answers.each do |answer| %>
-              <% selected_option = answer.selected_option %>
-              <p><%= selected_option ? selected_option.content : 'No answer selected' %></p>
-            <% end %>
-          </td>
-          <td>
-            <% result.user_answers.each do |answer| %>
-              <% correct_option = answer.question.options.find_by(correct: true) %>
-              <p><%= correct_option ? correct_option.content : 'No correct option' %></p>
-            <% end %>
-          </td>
           <td><%= link_to 'View', admin_project_assessment_result_path(@project, @assessment, result), class: 'linkcolor' %></td>
         </tr>
       <% end %>

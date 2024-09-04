@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Admin::ResultsController, type: :controller do
@@ -43,9 +45,9 @@ RSpec.describe Admin::ResultsController, type: :controller do
   describe 'DELETE #destroy' do
     it 'destroys the requested result' do
       result # Ensure the result is created
-      expect {
+      expect do
         delete :destroy, params: { project_id: project.id, assessment_id: assessment.id, id: result.id }
-      }.to change(Result, :count).by(-1)
+      end.to change(Result, :count).by(-1)
     end
 
     it 'redirects to the results list' do
