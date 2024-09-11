@@ -12,12 +12,12 @@
 
   <div class="form-outline mb-4 text-light">
     <%= f.label :Start_date, class: "form-label" %>
-    <%= f.date_select :start_date, required: true, autofocus: true, class: "form-control" %>
+    <%= datepicker(f, :start_date) %>
   </div>
 
   <div class="form-outline mb-4 text-light">
     <%= f.label :End_Date, class: "form-label" %>
-    <%= f.date_select :end_date, required: true, autofocus: true, class: "form-control" %>
+    <%= datepicker(f, :end_date) %>
   </div>
 
   <div class="dropdown field mb-3 text-start text-light">

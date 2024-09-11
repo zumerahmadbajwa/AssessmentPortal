@@ -67,6 +67,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'bootstrap', '~> 5.2.1'
+gem 'bootstrap-datepicker-rails'
 gem 'devise'
 gem 'devise_invitable', '~> 2.0.0'
 gem 'jquery-rails'

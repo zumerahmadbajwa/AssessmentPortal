@@ -10,8 +10,6 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <div class="container-fluid">
       <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bgcolor rounded border bg-gradient">
@@ -19,6 +17,8 @@
         </div>
         <main class="col px-4">
           <%= yield %>
+          <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
         </main>
       </div>
     </div>
